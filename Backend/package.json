@@ -1,0 +1,53 @@
+{
+  "name": "plantillaexpress",
+  "version": "1.0.0",
+  "description": "plantilla con express :)",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon dist/app.js",
+    "dev": "npx tsc && nodemon src/app.ts",
+    "build": "npx tsc"
+  },
+  "author": "Lorainne",
+  "license": "ISC",
+  "dependencies": {
+    "@automapper/classes": "^8.8.1",
+    "@automapper/core": "^8.8.1",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "class-validator-jsonschema": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "i": "^0.3.7",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.8",
+    "nodemailer": "^6.9.13",
+    "nodemon": "^3.1.0",
+    "npm": "^10.8.0",
+    "openapi3-ts": "^4.3.1",
+    "reflect-metadata": "^0.1.14",
+    "routing-controllers": "^0.10.4",
+    "routing-controllers-openapi": "^4.0.0",
+    "sequelize": "^6.37.3",
+    "sequelize-typescript": "^2.1.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "ts-node": "^10.9.2",
+    "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.12",
+    "@types/nodemailer": "^6.4.15",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "typescript": "^5.4.5"
+  }
+}

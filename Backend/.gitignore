@@ -1,0 +1,8 @@
+# file generate for the system
+node_modules/
+
+# environment variables
+.env
+
+# file generate to moment of compilation
+dist/
