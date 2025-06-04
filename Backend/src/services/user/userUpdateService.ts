@@ -2,7 +2,7 @@ import { validate } from "class-validator";
 import { Inject, Service } from "typedi";
 import { connection } from "../../config/configDb";
 import { mapper } from "../../config/mapper";
-import { UserUpdateServiceInterface } from "../../interfaces/services/user/IUserUpdate";
+import { UserUpdateServiceInterface } from "../../interfaces/services/user/IUserUpdateService";
 import { UserRequestDto } from "../../models/user/dto/userRequestDto";
 import { UserResponseDto } from "../../models/user/dto/userResponseDto";
 import { User } from "../../models/user/model/userModel";

@@ -34,4 +34,12 @@ export class User extends Model {
   @AutoMap()
   @Column({ type: DataTypes.STRING })
   declare password?: string;
+
+  /**
+   * Aqui hacemos la definicion para la columna de los roles
+   */
+
+  @AutoMap()
+  @Column({ type: DataTypes.ENUM('admin', 'student'), allowNull: false })
+  declare role?: 'admin' | 'student'; 
 }

@@ -1,7 +1,7 @@
 import { Inject, Service } from "typedi";
 import { connection } from "../../config/configDb";
 import { mapper } from "../../config/mapper";
-import { UserGetByIdServiceInterface } from "../../interfaces/services/user/IUserGetById";
+import { UserGetByIdServiceInterface } from "../../interfaces/services/user/IUserGetByIdService";
 import { UserRequestDto } from "../../models/user/dto/userRequestDto";
 import { UserResponseDto } from "../../models/user/dto/userResponseDto";
 import { User } from "../../models/user/model/userModel";

@@ -15,3 +15,4 @@ export function registerRepositories() {
     new GenericRepository<UserRequestDto, User>("user")
   );
 }
+

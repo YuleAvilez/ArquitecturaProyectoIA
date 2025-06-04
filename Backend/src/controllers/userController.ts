@@ -9,8 +9,8 @@ import {
 import { Inject, Service } from "typedi";
 import { ChangePasswordServiceInterface } from "../interfaces/services/user/IChangePasswordService";
 import { UserCreateServiceInterface } from "../interfaces/services/user/IUserCreateService";
-import { UserGetByIdServiceInterface } from "../interfaces/services/user/IUserGetById";
-import { UserUpdateServiceInterface } from "../interfaces/services/user/IUserUpdate";
+import { UserGetByIdServiceInterface } from "../interfaces/services/user/IUserGetByIdService";
+import { UserUpdateServiceInterface } from "../interfaces/services/user/IUserUpdateService";
 import { UserChangePasswordRequestDto } from "../models/user/dto/userChangePasswordRequestDto";
 import { UserRequestDto } from "../models/user/dto/userRequestDto";
 import { UserResponseDto } from "../models/user/dto/userResponseDto";
