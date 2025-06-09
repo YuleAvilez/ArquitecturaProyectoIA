@@ -1,75 +1,40 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import illustration from "../../assets/images/LoginImage4.jpg";
+import LoginForm from "../../components/LoginForm";
+import RegisterForm from "../../components/RegisterForm";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(true);
+  const [showForm, setShowForm] = useState(true); // para retrasar el cambio de formulario
+  const animacion = 'transform transition-all duration-700 ease-in-out '; // para retrasar el cambio de formulario
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const toggleForm = () => {
+    setShowLogin((prev) => !prev);
 
-    if (!email || !password) {
-      toast.error("Por favor, completa ambos campos.");
-      return;
-    }
-
-    toast.success("Inicio de sesión exitoso!");
-    navigate("/SurveyPage");
+    // sincroniza el cambio de formulario después de la animación
+    setTimeout(() => {
+      setShowForm((prev) => !prev);
+    }, 250); // mismo valor que la duración de tu transición
   };
 
   return (
-    <div className="w-screen h-screen grid lg:grid-cols-2 overflow-hidden bg-white">
-      <div className="left px-8 py-12 flex flex-col justify-center">
-        <div className="Tittle grid gap-y-8">
-          <h1 className="text-4xl font-extrabold text-purple-800">Proyecto IA</h1>
-          <h2 className="text-4xl font-bold text-gray-900">Hola, bienvenido</h2>
-          <p className="text-lg text-gray-600">Ingresa aquí</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="formulario-login py-8 grid gap-y-6">
-          <div>
-            <label className="block text-md font-semibold text-gray-700 mb-1">Correo</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-5 py-3 border border-gray-300 rounded-lg text-black focus:ring-4 focus:ring-purple-600 focus:outline-none"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-md font-semibold text-gray-700 mb-1">Contraseña</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-5 py-3 border border-gray-300 rounded-lg text-black focus:ring-4 focus:ring-purple-600 focus:outline-none"
-              placeholder="••••••••"
-            />
-          </div>
-
-          <div className="flex justify-between items-center text-sm">
-            <a href="#" className="text-purple-700 hover:underline">
-              ¿Olvidaste la contraseña?
-            </a>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="w-full bg-purple-700 text-white py-3 rounded-lg hover:bg-purple-900 transition text-lg font-semibold"
-            >
-              Iniciar sesión
-            </button>
-          </div>
-        </form>
+    <div className={`w-screen h-screen grid lg:grid-cols-2 overflow-hidden ${animacion} bg-white`}>
+      
+      <div
+        className={`
+          left px-8 py-12
+          flex flex-col justify-center
+          ${animacion}
+          ${showLogin ? "translate-x-0" : "lg:translate-x-full"}`}
+      >
+        {showForm ? <LoginForm onSwitch={toggleForm} /> : <RegisterForm onSwitch={toggleForm} />}
       </div>
 
-      <div className="right hidden lg:flex items-center justify-center bg-purple-300 p-8">
+      <div
+        className={`right lg:flex hidden items-center justify-center bg-purple-300 p-8 ${animacion} ${
+          showLogin ? "translate-x-0" : "lg:-translate-x-full"
+        }`}
+      >
         <img
           src={illustration}
           alt="Illustration"
