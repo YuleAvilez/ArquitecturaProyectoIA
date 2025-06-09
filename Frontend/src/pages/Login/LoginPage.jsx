@@ -1,4 +1,3 @@
-// src/pages/LoginPage.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +6,7 @@ import illustration from "../../assets/images/LoginImage4.jpg";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,11 +29,13 @@ export default function LoginPage() {
           <p className="text-lg text-gray-600">Ingresa aquí</p>
         </div>
 
-        <form className="formulario-login py-8 grid gap-y-6">
+        <form onSubmit={handleSubmit} className="formulario-login py-8 grid gap-y-6">
           <div>
             <label className="block text-md font-semibold text-gray-700 mb-1">Correo</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-5 py-3 border border-gray-300 rounded-lg text-black focus:ring-4 focus:ring-purple-600 focus:outline-none"
               placeholder="you@example.com"
             />
@@ -43,6 +45,8 @@ export default function LoginPage() {
             <label className="block text-md font-semibold text-gray-700 mb-1">Contraseña</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-5 py-3 border border-gray-300 rounded-lg text-black focus:ring-4 focus:ring-purple-600 focus:outline-none"
               placeholder="••••••••"
             />
