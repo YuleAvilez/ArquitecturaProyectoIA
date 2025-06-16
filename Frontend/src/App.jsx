@@ -1,5 +1,5 @@
-import AppRoutes from "./routes/AppRoutes";
 import "react-toastify/dist/ReactToastify.css";
+import AppRoutes from "./routes/AppRoutes";
 function App() {
   return <AppRoutes />;
 }
