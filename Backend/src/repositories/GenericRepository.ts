@@ -22,6 +22,14 @@ export class GenericRepository<
     this._context = context[modelName] as ModelCtor<TModel>;
   }
 
+  public get model() {
+    return this._context;
+  }
+
+  public get sequelize() {
+    return this._context.sequelize!;
+  }
+
   /**
    * Crear un nuevo elemento.
    * @param request - Datos a crear.
@@ -31,7 +39,6 @@ export class GenericRepository<
    */
   async create(request: TRequest, options?: CreateOptions): Promise<TModel> {
     try {
-      console.log(request, "aquii");
       const response = await this._context.create(
         request as TModel["_creationAttributes"],
         options

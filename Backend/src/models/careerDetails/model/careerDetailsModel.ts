@@ -2,31 +2,31 @@ import { AutoMap } from "@automapper/classes";
 import { DataTypes } from "sequelize";
 import { Column, Model, Table } from "sequelize-typescript";
 
-@Table({ tableName: "Users", timestamps: true })
-export class User extends Model {
+@Table({ tableName: "CareerDetails", timestamps: true })
+export class CareerDetails extends Model {
   @AutoMap()
   @Column({ type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true })
-  declare userId?: number;
+  declare careerDetailId?: number;
 
   @AutoMap()
   @Column({ type: DataTypes.STRING })
-  declare userName?: string;
+  declare careerName?: string;
 
   @AutoMap()
   @Column({ type: DataTypes.STRING })
-  declare email?: string;
-
-  @AutoMap()
-  @Column({ type: DataTypes.INTEGER })
-  declare genderId?: number;
+  declare careerNameNormalize?: string;
 
   @AutoMap()
   @Column({ type: DataTypes.STRING })
-  declare password?: string;
+  declare salary?: string;
 
   @AutoMap()
-  @Column({ type: DataTypes.INTEGER, defaultValue: 2 })
-  declare roleId?: number;
+  @Column({ type: DataTypes.STRING })
+  declare trends?: string;
+
+  @AutoMap()
+  @Column({ type: DataTypes.STRING })
+  declare sources?: string;
 
   @AutoMap()
   @Column({ type: DataTypes.DATE })

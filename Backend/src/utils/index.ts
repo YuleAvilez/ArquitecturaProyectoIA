@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
+import { CareerRecomendationCreateRequestDto } from "../models/careerRecommendations/dto/careerRecomendationCreateRequestDto";
 
 dotenv.config();
 
@@ -41,3 +42,16 @@ export const CodeRandom = () => {
   }
   return randomCode.toUpperCase();
 };
+
+export function formatAnswers(
+  responses: CareerRecomendationCreateRequestDto[]
+): string {
+  return responses.map((r, i) => `Respuesta ${i + 1}: ${r.answer}`).join("\n");
+}
+
+export function normalizeText(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
