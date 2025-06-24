@@ -1,4 +1,4 @@
-import { Answers } from "../../../data/DataDashboard";
+import { Answers } from "../../../../data/DataDashboard";
 
 export const LastSurvey = () => {
   return (

@@ -8,7 +8,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { users } from "../../../../data/DataDashboard";
+import { users } from "../../../../../data/DataDashboard";
 
 ChartJS.register(
   CategoryScale,

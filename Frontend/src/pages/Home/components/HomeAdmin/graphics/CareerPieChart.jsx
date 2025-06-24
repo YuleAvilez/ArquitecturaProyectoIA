@@ -1,6 +1,6 @@
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import { Pie } from "react-chartjs-2";
-import { Careers } from "../../../../data/DataDashboard";
+import { Careers } from "../../../../../data/DataDashboard";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
