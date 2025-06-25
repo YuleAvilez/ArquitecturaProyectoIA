@@ -1,17 +1,17 @@
-import { JsonController, Post } from "routing-controllers";
+import { Get, JsonController } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { IModuleGetAllService } from "../interfaces/services/module/IModuleGetAllService";
 import { ModuleResponseDto } from "../models/modules/dto/moduleResponseDto";
 
 @Service()
-@JsonController()
+@JsonController("/modules")
 export class ModuleController {
   constructor(
     @Inject("IModuleGetAllService")
     private readonly _moduleGetAllService: IModuleGetAllService
-  ) {}
+  ) { }
 
-  @Post("/getAll")
+  @Get("/getAll")
   async moduleGetAll(): Promise<ModuleResponseDto[]> {
     return await this._moduleGetAllService.handle();
   }

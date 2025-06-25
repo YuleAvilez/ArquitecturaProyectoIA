@@ -5,8 +5,8 @@ import { GetUserVocationalResponseByUserIdServiceInterface } from "../interfaces
 import { UserReportDashboardServiceInterface } from "../interfaces/services/vocationalSurvey/userReportDashboardServiceInterface";
 import { VocationalSurveyProcessingServiceInterface } from "../interfaces/services/vocationalSurvey/vocationalSurveyProcessingServiceInterface";
 import { AdminReportDashboardResponseDto } from "../models/vocationalSurveys/dto/adminReportDashboardResponseDto";
+import { UserReportDashboardResponseDto } from "../models/vocationalSurveys/dto/userReportDashboardResponseDto";
 import { VocationalSurveyProcessingRequestDto } from "../models/vocationalSurveys/dto/vocationalSurveyProcessingRequestDto";
-import { VocationalSurveyProcessingResponseDto } from "../models/vocationalSurveys/dto/vocationalSurveyProcessingResponseDto";
 import { VocationSurveyGetByUserIdResponseDto } from "../models/vocationalSurveys/dto/vocationSurveyGetByUserIdResponseDto";
 
 @Service()
@@ -26,7 +26,7 @@ export class VocationalSurveyController {
   @Post("/processingAnswers")
   async processingAnswers(
     @Body() request: VocationalSurveyProcessingRequestDto
-  ): Promise<VocationalSurveyProcessingResponseDto> {
+  ): Promise<UserReportDashboardResponseDto> {
     return await this._vocationalSurveyProcessingServiceInterface.handle(
       request
     );
@@ -49,7 +49,7 @@ export class VocationalSurveyController {
   @Get("/userReport/:userId")
   async userReport(
     @Param("userId") userId: number
-  ): Promise<VocationalSurveyProcessingResponseDto> {
+  ): Promise<UserReportDashboardResponseDto> {
     return await this._userReportDashboardServiceInterface.handle(userId);
   }
 }

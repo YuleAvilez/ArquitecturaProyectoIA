@@ -1,11 +1,10 @@
 import { Inject, Service } from "typedi";
 import { UserReportDashboardServiceInterface } from "../../../../interfaces/services/vocationalSurvey/userReportDashboardServiceInterface";
 import { CareerDetailRequestDto } from "../../../../models/careerDetails/dto/careerDetailRequestDto";
-import { CareerDetailResponseDto } from "../../../../models/careerDetails/dto/careerDetailResponseDto";
 import { CareerDetails } from "../../../../models/careerDetails/model/careerDetailsModel";
-import { CareerRecommendationResponseDto } from "../../../../models/careerRecommendations/dto/careerRecomendationResponseDto";
 import { CareerRecommendations } from "../../../../models/careerRecommendations/model/careerRecommendationsModel";
-import { VocationalSurveyProcessingResponseDto } from "../../../../models/vocationalSurveys/dto/vocationalSurveyProcessingResponseDto";
+import { DataUserDashboard } from "../../../../models/vocationalSurveys/dto/dataUserDashboard";
+import { UserReportDashboardResponseDto } from "../../../../models/vocationalSurveys/dto/userReportDashboardResponseDto";
 import { VocationalSurveyRequestDto } from "../../../../models/vocationalSurveys/dto/vocationalSurveyRequestDto";
 import { VocationalSurveys } from "../../../../models/vocationalSurveys/model/vocationalSurveysModel";
 import { GenericRepository } from "../../../../repositories/GenericRepository";
@@ -26,7 +25,7 @@ export class UserReportDashboardService
     >
   ) { }
 
-  async handle(userId: number): Promise<VocationalSurveyProcessingResponseDto> {
+  async handle(userId: number): Promise<UserReportDashboardResponseDto> {
     try {
       const mySurvey = await this._repository.getOne({
         where: { userId },
@@ -39,14 +38,7 @@ export class UserReportDashboardService
         throw new Error("No existe una encuesta para este usuario.");
       }
 
-      const careerRecommendations = mappedPlain.recommendations.map(
-        (x: CareerRecommendations) => ({
-          careerName: x.careerName,
-          description: x.description,
-        })
-      ) as CareerRecommendationResponseDto[];
-
-      const careerDetails: CareerDetailResponseDto[] = [];
+      const data: DataUserDashboard[] = [];
 
       for (const recommendation of mappedPlain.recommendations) {
         const detail = await this._careerDetailRepository.getOne({
@@ -55,18 +47,18 @@ export class UserReportDashboardService
 
         const plainDetail = detail?.get({ plain: true });
 
-        careerDetails.push({
+        data.push({
           careerName: plainDetail?.careerName,
+          description: recommendation?.description,
           salary: plainDetail?.salary,
           trends: JSON.parse(plainDetail?.trends),
           sources: JSON.parse(plainDetail?.sources),
         });
       }
 
-      const responses = {
+      const responses: UserReportDashboardResponseDto = {
         vocationalSurveyId: mappedPlain.vocationalSurveyId,
-        careerRecommendations,
-        careerDetails,
+        data,
       };
 
       return responses;
