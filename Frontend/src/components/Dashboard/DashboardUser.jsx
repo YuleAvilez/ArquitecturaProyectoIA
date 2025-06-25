@@ -10,19 +10,17 @@ export const DashboardUser = () => {
             to="/Dashboard"
             end
             className={({ isActive }) =>
-              `text-white px-4 py-2 rounded transition-all ${
-                isActive ? "bg-purple-800" : "hover:bg-purple-800"
+              `text-white px-4 py-2 rounded transition-all ${isActive ? "bg-purple-800" : "hover:bg-purple-800"
               }`
             }
           >
             Inicio
           </NavLink>
           <NavLink
-            to="/Dashboard/gestionEncuesta"
+            to="/Dashboard/resumenEncuestaUsuario/:userId"
             end
             className={({ isActive }) =>
-              `text-white px-4 py-2 rounded transition-all ${
-                isActive ? "bg-purple-800" : "hover:bg-purple-800"
+              `text-white px-4 py-2 rounded transition-all ${isActive ? "bg-purple-800" : "hover:bg-purple-800"
               }`
             }
           >

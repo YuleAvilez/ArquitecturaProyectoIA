@@ -1,22 +1,23 @@
+import { Loading } from "../../../../components/Loading";
 import { CareerPieChart } from "./graphics/CareerPieChart";
 import { UserBarChart } from "./graphics/UserBarChart";
 
-export const MainOverview = () => {
+export const MainOverview = ({ loading, data }) => {
   return (
-    <div className="grid grid-rows-[0.6fr_2fr] gap-4 h-full">
+    <>{loading ? <Loading /> : <div className="grid grid-rows-[0.6fr_2fr] gap-4 h-full">
       <div className="grid grid-cols-2 gap-4 text-black">
         <div className="rounded-lg bg-violet-200 flex items-center p-4">
           <img src="survey.png" alt="icono_encuesta" className="w-30 h-25" />
           <div className="ml-4">
             <p className="text-3xl font-semibold">Total usuarios</p>
-            <p className="text-5xl font-bold text-purple-700 -mt-1">300</p>
+            <p className="text-5xl font-bold text-purple-700 -mt-1">{data?.totalUsers}</p>
           </div>
         </div>
         <div className="rounded-lg bg-violet-200 flex items-center p-4">
           <img src="group.png" alt="icono_grupo" className="w-20 h-20" />
           <div className="ml-4">
             <p className="text-3xl font-semibold">Total de encuestas</p>
-            <p className="text-5xl font-bold text-purple-700 -mt-1">280</p>
+            <p className="text-5xl font-bold text-purple-700 -mt-1">{data?.totalSurveys}</p>
           </div>
         </div>
       </div>
@@ -43,6 +44,6 @@ export const MainOverview = () => {
           <UserBarChart />
         </div>
       </div>
-    </div>
+    </div>}</>
   );
 };

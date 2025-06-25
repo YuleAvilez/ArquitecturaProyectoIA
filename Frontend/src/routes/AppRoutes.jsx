@@ -6,6 +6,7 @@ import SurveyPage from "../pages/Survey/SurveyPage";
 import { SurveyModulePage } from "../pages/SurveyModule/SurveyModulePage";
 import { UserPage } from "../pages/Users/UserPage";
 import { ProtectedRoutes } from "./ProtectedRoutes";
+import { UserSurveySummary } from "../pages/userSurveySummary/userSurveySummaryPage";
 
 export default function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ export default function AppRoutes() {
           <Route index element={<HomePage />} />
           <Route path="gestionUsuarios" element={<UserPage />} />
           <Route path="gestionEncuesta" element={<SurveyModulePage />} />
+          <Route path="resumenEncuestaUsuario/:userId" element={<UserSurveySummary />} />
         </Route>
       </Routes>
     </BrowserRouter>
