@@ -1,12 +1,7 @@
 import { AutoMap } from "@automapper/classes";
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class UserVocationalRequestDto {
-  @AutoMap()
-  @IsNumber()
-  @IsNotEmpty()
-  public vocationalSurveyId?: number;
-
+export class UserVocationalCreateRequestDto {
   @AutoMap()
   @IsNumber()
   @IsNotEmpty()

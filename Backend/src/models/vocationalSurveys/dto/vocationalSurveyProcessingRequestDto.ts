@@ -1,7 +1,7 @@
 import { AutoMap } from "@automapper/classes";
-import { IsArray, IsNotEmpty, IsNumber, ValidateNested } from "class-validator";
-import { UserVocationalRequestDto } from "../../userVocationalResponses/dto/userVocationalRequestDto";
 import { Type } from "class-transformer";
+import { IsArray, IsNotEmpty, IsNumber, ValidateNested } from "class-validator";
+import { UserVocationalCreateRequestDto } from "../../userVocationalResponses/dto/userVocationalCreateRequestDto";
 
 export class VocationalSurveyProcessingRequestDto {
   @AutoMap()
@@ -13,6 +13,6 @@ export class VocationalSurveyProcessingRequestDto {
   @IsArray()
   @ValidateNested({ each: true })
   @IsNotEmpty()
-  @Type(() => UserVocationalRequestDto)
-  public surveyAnswers?: UserVocationalRequestDto[];
+  @Type(() => UserVocationalCreateRequestDto)
+  public surveyAnswers?: UserVocationalCreateRequestDto[];
 }

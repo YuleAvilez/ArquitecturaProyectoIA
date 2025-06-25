@@ -11,15 +11,14 @@ import { GenericRepository } from "../../repositories/GenericRepository";
 
 @Service()
 export class GetUserVocationalResponseByUserIdService
-  implements GetUserVocationalResponseByUserIdServiceInterface
-{
+  implements GetUserVocationalResponseByUserIdServiceInterface {
   constructor(
     @Inject("VocationalSurveyRepository")
     private readonly _repository: GenericRepository<
       VocationalSurveyRequestDto,
       VocationalSurveys
     >
-  ) {}
+  ) { }
 
   async handle(
     userId: number

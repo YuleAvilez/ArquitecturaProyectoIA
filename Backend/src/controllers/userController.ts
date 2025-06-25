@@ -5,6 +5,7 @@ import {
   Param,
   Post,
   Put,
+  QueryParam,
 } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { ChangePasswordServiceInterface } from "../interfaces/services/user/IChangePasswordService";
@@ -14,6 +15,8 @@ import { UserUpdateServiceInterface } from "../interfaces/services/user/IUserUpd
 import { UserChangePasswordRequestDto } from "../models/user/dto/userChangePasswordRequestDto";
 import { UserRequestDto } from "../models/user/dto/userRequestDto";
 import { UserResponseDto } from "../models/user/dto/userResponseDto";
+import { UserGetAllServiceInterface } from "../interfaces/services/user/userGetAllServiceInterface";
+import { PaginationDto } from "../utils/dto/PaginationDto";
 
 @Service()
 @JsonController("/user")
@@ -26,8 +29,10 @@ export class UserController {
     @Inject("UserUpdateServiceInterface")
     private readonly _userUpdateService: UserUpdateServiceInterface,
     @Inject("ChangePasswordServiceInterface")
-    private readonly _changePasswordService: ChangePasswordServiceInterface
-  ) {}
+    private readonly _changePasswordService: ChangePasswordServiceInterface,
+    @Inject("UserGetAllServiceInterface")
+    private readonly _userGetAllServiceInterface: UserGetAllServiceInterface,
+  ) { }
 
   @Post("/create")
   async create(@Body() body: UserRequestDto): Promise<UserResponseDto> {
@@ -52,5 +57,13 @@ export class UserController {
     request: UserChangePasswordRequestDto
   ): Promise<boolean> {
     return await this._changePasswordService.handle(request);
+  }
+
+  @Get("/pagiantion")
+  async pagiantion(
+    @QueryParam("page") page: number = 1,
+    @QueryParam("size") size: number = 10
+  ): Promise<PaginationDto<UserResponseDto>> {
+    return await this._userGetAllServiceInterface.handle(page, size);
   }
 }

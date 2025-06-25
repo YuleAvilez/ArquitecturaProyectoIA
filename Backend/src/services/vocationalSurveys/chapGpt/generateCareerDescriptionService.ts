@@ -1,11 +1,10 @@
 import OpenAI from "openai";
 import { Service } from "typedi";
-import { GenerateCareerDescriptionServiceInterface } from "../../interfaces/services/vocationalSurvey/generateCareerDescriptionServiceInterface";
+import { GenerateCareerDescriptionServiceInterface } from "../../../interfaces/services/vocationalSurvey/generateCareerDescriptionServiceInterface";
 
 @Service()
 export class GenerateCareerDescriptionService
-  implements GenerateCareerDescriptionServiceInterface
-{
+  implements GenerateCareerDescriptionServiceInterface {
   private readonly openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -17,7 +16,7 @@ export class GenerateCareerDescriptionService
         messages: [
           {
             role: "system",
-            content: `Eres un orientador vocacional. Al darte el nombre de una carrera, responde con una breve descripción clara, motivadora y en una sola frase. Solo texto, sin comillas ni formato.`,
+            content: `Eres un orientador vocacional. Al darte el nombre de una carrera, responde con una breve descripción clara, motivadora y en una sola frase. Escribe en lenguaje neutro, sin asumir género (ni masculino ni femenino). Evita palabras como "experto", "experta", "pionero", "pionera", "profesional", etc., y usa expresiones inclusivas como "quien estudia esta carrera", "la persona que elige este camino", etc. Solo texto, sin comillas ni formato.`
           },
           { role: "user", content: careerName },
         ],

@@ -69,6 +69,7 @@ export class SessionCreateService implements SessionCreateServiceInterface {
       request.refreshToken = await this._jwtService.create({
         email: request?.email,
         userId: mappedData?.userId,
+        roleId: mappedData?.roleId
       });
 
       const createdSession = await this._repository.create(request, {

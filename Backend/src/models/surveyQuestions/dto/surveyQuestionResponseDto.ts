@@ -2,7 +2,7 @@ import { AutoMap } from "@automapper/classes";
 
 export class SurveyQuestionResponseDto {
   @AutoMap()
-  public surveyQuestionsId?: number;
+  public surveyQuestionId?: number;
 
   @AutoMap()
   public questionText?: string;

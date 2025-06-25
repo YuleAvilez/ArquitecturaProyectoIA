@@ -6,4 +6,10 @@ export class UserResponseDto {
 
   @AutoMap()
   public email?: string;
+
+  @AutoMap()
+  public genderId?: number;
+
+  @AutoMap()
+  public roleId?: number;
 }

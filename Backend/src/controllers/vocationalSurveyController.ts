@@ -1,4 +1,4 @@
-import { Get, JsonController, Post } from "routing-controllers";
+import { Body, Get, JsonController, Param, Post } from "routing-controllers";
 import { Inject, Service } from "typedi";
 import { AdminReportDashboardServiceInterface } from "../interfaces/services/vocationalSurvey/adminReportDashboardServiceInterface";
 import { GetUserVocationalResponseByUserIdServiceInterface } from "../interfaces/services/vocationalSurvey/getUserVocationalResponseByUserIdServiceInterface";
@@ -21,11 +21,11 @@ export class VocationalSurveyController {
     private readonly _adminReportDashboardServiceInterface: AdminReportDashboardServiceInterface,
     @Inject("UserReportDashboardServiceInterface")
     private readonly _userReportDashboardServiceInterface: UserReportDashboardServiceInterface
-  ) {}
+  ) { }
 
   @Post("/processingAnswers")
   async processingAnswers(
-    request: VocationalSurveyProcessingRequestDto
+    @Body() request: VocationalSurveyProcessingRequestDto
   ): Promise<VocationalSurveyProcessingResponseDto> {
     return await this._vocationalSurveyProcessingServiceInterface.handle(
       request
@@ -34,7 +34,7 @@ export class VocationalSurveyController {
 
   @Get("/getSurveyByUserId/:userId")
   async getSurveyByUserId(
-    userId: number
+    @Param("userId") userId: number
   ): Promise<VocationSurveyGetByUserIdResponseDto[]> {
     return await this._getUserVocationalResponseByUserIdServiceInterface.handle(
       userId
@@ -48,7 +48,7 @@ export class VocationalSurveyController {
 
   @Get("/userReport/:userId")
   async userReport(
-    userId: number
+    @Param("userId") userId: number
   ): Promise<VocationalSurveyProcessingResponseDto> {
     return await this._userReportDashboardServiceInterface.handle(userId);
   }

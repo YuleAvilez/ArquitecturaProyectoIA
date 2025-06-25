@@ -1,19 +1,18 @@
 import { Inject, Service } from "typedi";
-import { UserReportDashboardServiceInterface } from "../../interfaces/services/vocationalSurvey/userReportDashboardServiceInterface";
-import { CareerDetailRequestDto } from "../../models/careerDetails/dto/careerDetailRequestDto";
-import { CareerDetailResponseDto } from "../../models/careerDetails/dto/careerDetailResponseDto";
-import { CareerDetails } from "../../models/careerDetails/model/careerDetailsModel";
-import { CareerRecommendationResponseDto } from "../../models/careerRecommendations/dto/careerRecomendationResponseDto";
-import { CareerRecommendations } from "../../models/careerRecommendations/model/careerRecommendationsModel";
-import { VocationalSurveyProcessingResponseDto } from "../../models/vocationalSurveys/dto/vocationalSurveyProcessingResponseDto";
-import { VocationalSurveyRequestDto } from "../../models/vocationalSurveys/dto/vocationalSurveyRequestDto";
-import { VocationalSurveys } from "../../models/vocationalSurveys/model/vocationalSurveysModel";
-import { GenericRepository } from "../../repositories/GenericRepository";
+import { UserReportDashboardServiceInterface } from "../../../../interfaces/services/vocationalSurvey/userReportDashboardServiceInterface";
+import { CareerDetailRequestDto } from "../../../../models/careerDetails/dto/careerDetailRequestDto";
+import { CareerDetailResponseDto } from "../../../../models/careerDetails/dto/careerDetailResponseDto";
+import { CareerDetails } from "../../../../models/careerDetails/model/careerDetailsModel";
+import { CareerRecommendationResponseDto } from "../../../../models/careerRecommendations/dto/careerRecomendationResponseDto";
+import { CareerRecommendations } from "../../../../models/careerRecommendations/model/careerRecommendationsModel";
+import { VocationalSurveyProcessingResponseDto } from "../../../../models/vocationalSurveys/dto/vocationalSurveyProcessingResponseDto";
+import { VocationalSurveyRequestDto } from "../../../../models/vocationalSurveys/dto/vocationalSurveyRequestDto";
+import { VocationalSurveys } from "../../../../models/vocationalSurveys/model/vocationalSurveysModel";
+import { GenericRepository } from "../../../../repositories/GenericRepository";
 
 @Service()
 export class UserReportDashboardService
-  implements UserReportDashboardServiceInterface
-{
+  implements UserReportDashboardServiceInterface {
   constructor(
     @Inject("VocationalSurveyRepository")
     private readonly _repository: GenericRepository<
@@ -25,7 +24,7 @@ export class UserReportDashboardService
       CareerDetailRequestDto,
       CareerDetails
     >
-  ) {}
+  ) { }
 
   async handle(userId: number): Promise<VocationalSurveyProcessingResponseDto> {
     try {
@@ -51,7 +50,7 @@ export class UserReportDashboardService
 
       for (const recommendation of mappedPlain.recommendations) {
         const detail = await this._careerDetailRepository.getOne({
-          where: { careerNameNormalize: recommendation.careerNameNormalized },
+          where: { careerNameNormalize: recommendation.careerNameNormalize },
         });
 
         const plainDetail = detail?.get({ plain: true });

@@ -21,11 +21,11 @@ export class CareerDetails extends Model {
   declare salary?: string;
 
   @AutoMap()
-  @Column({ type: DataTypes.STRING })
+  @Column({ type: DataTypes.TEXT })
   declare trends?: string;
 
   @AutoMap()
-  @Column({ type: DataTypes.STRING })
+  @Column({ type: DataTypes.TEXT })
   declare sources?: string;
 
   @AutoMap()

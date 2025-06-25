@@ -5,6 +5,7 @@ import { ModuleController } from "./moduleController";
 import { SessionController } from "./sessionController";
 import { UserController } from "./userController";
 import { VocationalSurveyController } from "./vocationalSurveyController";
+import { SurveyQuestionController } from "./surveyQuestionController";
 
 export const ControllerDependencies: RoutingControllersOptions = {
   controllers: [
@@ -12,6 +13,7 @@ export const ControllerDependencies: RoutingControllersOptions = {
     SessionController,
     ModuleController,
     VocationalSurveyController,
+    SurveyQuestionController,
   ],
   authorizationChecker: authorizationChecker,
   middlewares: [SessionValidatorMiddleware],

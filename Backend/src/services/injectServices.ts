@@ -2,10 +2,12 @@ import Container from "typedi";
 import { IModuleGetAllService } from "../interfaces/services/module/IModuleGetAllService";
 import { SessionCreateServiceInterface } from "../interfaces/services/session/ISessionCreateService";
 import { SessionDeleteServiceInterface } from "../interfaces/services/session/ISessionDeleteService";
+import { SurveyQuestionGetAllServiceInterface } from "../interfaces/services/surveyQuestion/surveyQuestionGetAllServiceInterface";
 import { ChangePasswordServiceInterface } from "../interfaces/services/user/IChangePasswordService";
 import { UserCreateServiceInterface } from "../interfaces/services/user/IUserCreateService";
 import { UserGetByIdServiceInterface } from "../interfaces/services/user/IUserGetById";
 import { UserUpdateServiceInterface } from "../interfaces/services/user/IUserUpdate";
+import { UserGetAllServiceInterface } from "../interfaces/services/user/userGetAllServiceInterface";
 import { AdminReportDashboardServiceInterface } from "../interfaces/services/vocationalSurvey/adminReportDashboardServiceInterface";
 import { ChatGptSurveyServiceInterface } from "../interfaces/services/vocationalSurvey/chatGptSurveyServiceInterface";
 import { GenerateCareerDescriptionServiceInterface } from "../interfaces/services/vocationalSurvey/generateCareerDescriptionServiceInterface";
@@ -16,17 +18,19 @@ import { VocationalSurveyProcessingServiceInterface } from "../interfaces/servic
 import { ModuleGetAllService } from "./modules/moduleGetAllService";
 import { SessionDeleteService } from "./session/deleteSessionService";
 import { SessionCreateService } from "./session/sessionCreateService";
+import { SurveyQuestionGetAllService } from "./surveyQuestions/surveyQuestionGetAllService";
 import { ChangePasswordService } from "./user/changePasswordService";
 import { UserCreateService } from "./user/userCreateService";
+import { UserGetAllService } from "./user/userGetAllService";
 import { UserGetByIdService } from "./user/userGetByIdService";
 import { UserUpdateService } from "./user/userUpdateService";
-import { AdminReportDashboardService } from "./vocationalSurveys/adminReportDashboardService";
-import { ChatGptSurveyService } from "./vocationalSurveys/chatGptSurveyService";
-import { GenerateCareerDescriptionService } from "./vocationalSurveys/generateCareerDescriptionService";
-import { GenerateCareerDetailsService } from "./vocationalSurveys/generateCareerDetailsService";
-import { UserReportDashboardService } from "./vocationalSurveys/userReportDashboardService";
+import { ChatGptSurveyService } from "./vocationalSurveys/chapGpt/chatGptSurveyService";
+import { AdminReportDashboardService } from "./vocationalSurveys/dashboard/admin/adminReportDashboardService";
+import { GenerateCareerDescriptionService } from "./vocationalSurveys/chapGpt/generateCareerDescriptionService";
+import { GenerateCareerDetailsService } from "./vocationalSurveys/chapGpt/generateCareerDetailsService";
+import { UserReportDashboardService } from "./vocationalSurveys/dashboard/user/userReportDashboardService";
 import { GetUserVocationalResponseByUserIdService } from "./vocationalSurveys/vocationalSurveyGetByUserIdService";
-import { VocationalSurveyProcessingService } from "./vocationalSurveys/vocationalSurveyProcessingService";
+import { VocationalSurveyProcessingService } from "./vocationalSurveys/processing/vocationalSurveyProcessingService";
 
 export function registerServices() {
   Container.set<UserCreateServiceInterface>(
@@ -92,5 +96,13 @@ export function registerServices() {
   Container.set<UserReportDashboardServiceInterface>(
     "UserReportDashboardServiceInterface",
     Container.get(UserReportDashboardService)
+  );
+  Container.set<UserGetAllServiceInterface>(
+    "UserGetAllServiceInterface",
+    Container.get(UserGetAllService)
+  );
+  Container.set<SurveyQuestionGetAllServiceInterface>(
+    "SurveyQuestionGetAllServiceInterface",
+    Container.get(SurveyQuestionGetAllService)
   );
 }

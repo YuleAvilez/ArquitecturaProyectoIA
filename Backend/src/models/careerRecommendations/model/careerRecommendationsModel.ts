@@ -29,7 +29,7 @@ export class CareerRecommendations extends Model {
   declare careerNameNormalize?: string;
 
   @AutoMap()
-  @Column({ type: DataTypes.STRING })
+  @Column({ type: DataTypes.TEXT })
   declare description?: string;
 
   @AutoMap()
