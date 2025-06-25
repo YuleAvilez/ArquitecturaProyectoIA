@@ -1,37 +1,26 @@
 import { AutoMap } from "@automapper/classes";
-import { DataTypes } from "sequelize";
 import { Column, Model, Table } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
 
 @Table({ tableName: "Users", timestamps: true })
-/**
- * Definición de la clase User como un modelo Sequelize
- */
-export class User extends Model {
-  /**
-   * Definición de la columna id
-   */
+export class User extends Model {   
   @AutoMap()
   @Column({ type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true })
-  declare userId?: number;
+  declare IdUsuario?: number;
 
-  /**
-   * Definición de la columna userName
-   */
   @AutoMap()
   @Column({ type: DataTypes.STRING })
-  declare userName?: string;
+  declare Nombres: string;
 
-  /**
-   * Definición de la columna email
-   */
   @AutoMap()
   @Column({ type: DataTypes.STRING })
-  declare email?: string;
+  declare Apellidos: string;
 
-  /**
-   * Definición de la columna password
-   */
+  @AutoMap()
+  @Column({ type: DataTypes.STRING, unique: true })
+  declare Correo: string;
+
   @AutoMap()
   @Column({ type: DataTypes.STRING })
-  declare password?: string;
+  declare Contraseña: string;
 }
