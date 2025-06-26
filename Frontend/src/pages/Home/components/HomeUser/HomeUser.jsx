@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loading } from "../../../../components/Loading";
 import { GetUserReport } from "../../../../services/api/dashboard/getUserReport";
+import { getUserIdFromToken } from "../../../../utils";
 
 export const HomeUser = () => {
   const [loading, setLoading] = useState(true);

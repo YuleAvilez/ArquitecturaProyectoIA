@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const ThemeToggle = () => {
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
 
   const handleToggle = () => {
-    setTheme(!theme);
-    document.documentElement.classList.toggle("dark");
+    const newTheme = !theme;
+    setTheme(newTheme);
+    document.documentElement.classList.toggle("dark", newTheme);
+    localStorage.setItem("theme", newTheme ? "dark" : "light");
   };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme);
+  }, [theme]);
 
   return (
     <button
       onClick={handleToggle}
-      className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-500 hover:shadow transition"
+      className="w-10 h-10 dark:bg-gray-400 dark:border-gray-600 dark:text-white flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-500 hover:shadow transition"
       aria-label="Cambiar tema"
     >
       {theme ? (
-        // Tema claro
         <svg
           className="w-5 h-5"
           fill="none"
@@ -31,7 +38,6 @@ export const ThemeToggle = () => {
           />
         </svg>
       ) : (
-        // Tema oscuro
         <svg
           className="w-5 h-5"
           fill="none"

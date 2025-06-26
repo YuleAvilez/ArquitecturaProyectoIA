@@ -8,7 +8,6 @@ import {
   Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { users } from "../../../../../data/DataDashboard";
 
 ChartJS.register(
   CategoryScale,
@@ -18,19 +17,6 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
-const data = {
-  labels: ["Masculino", "Femenino"],
-  datasets: [
-    {
-      label: "Usuarios por género",
-      data: [users.masculino, users.femenino],
-      backgroundColor: ["#8e44ad", "#a78bfa"],
-      borderRadius: 8,
-      barThickness: 30,
-    },
-  ],
-};
 
 const options = {
   indexAxis: "y",
@@ -66,9 +52,22 @@ const options = {
   },
 };
 
-export const UserBarChart = () => {
+export const UserBarChart = ({ userByGenders }) => {
+  const data = {
+    labels: ["Masculino", "Femenino"],
+    datasets: [
+      {
+        label: "Usuarios por género",
+        data: [userByGenders.masculino, userByGenders.femenino],
+        backgroundColor: ["#8e44ad", "#a78bfa"],
+        borderRadius: 8,
+        barThickness: 30,
+      },
+    ],
+  };
+
   return (
-    <div className="w-full h-[290px] bg-purple-300 p-4 rounded-xl shadow-md">
+    <div className="w-full h-full dark:bg-purple-900 bg-purple-300 p-4 rounded-xl shadow-md">
       <Bar data={data} options={options} />
     </div>
   );

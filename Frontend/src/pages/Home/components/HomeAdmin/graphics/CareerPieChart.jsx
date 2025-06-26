@@ -1,25 +1,56 @@
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
+import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
-import { Careers } from "../../../../../data/DataDashboard";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const CareerPieChart = () => {
+export const CareerPieChart = ({ countByCareer }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const handleThemeChange = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+
+    handleThemeChange();
+    const observer = new MutationObserver(handleThemeChange);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const maxLabels = 5;
   const backgroundColors = [
     "#9b59b6",
     "#8e44ad",
     "#d291bc",
     "#c39bd3",
     "#a569bd",
+    "#b79ced",
   ];
 
+  const sortedCareers = [...countByCareer].sort((a, b) => b.count - a.count);
+  const topCareerNames = sortedCareers.slice(0, maxLabels).map((c) => c.careerName);
+
+  const groupedData = countByCareer.reduce((acc, item) => {
+    const label = topCareerNames.includes(item.careerName) ? item.careerName : "Otros";
+    acc[label] = (acc[label] || 0) + item.count;
+    return acc;
+  }, {});
+
+  const finalLabels = Object.keys(groupedData);
+  const finalData = Object.values(groupedData);
+
   const pieData = {
-    labels: Careers.map((c) => c.name),
+    labels: finalLabels,
     datasets: [
       {
         label: "Carreras recomendadas",
-        data: Careers.map((c) => c.total),
-        backgroundColor: backgroundColors,
+        data: finalData,
+        backgroundColor: backgroundColors.slice(0, finalLabels.length),
         borderColor: "#fff",
         borderWidth: 2,
       },
@@ -32,7 +63,7 @@ export const CareerPieChart = () => {
       legend: {
         position: "bottom",
         labels: {
-          color: "#4B0082",
+          color: isDark ? "#ffffff" : "#4B0082",
           font: {
             size: 14,
           },
@@ -53,8 +84,8 @@ export const CareerPieChart = () => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 w-full h-full max-h-[450px] flex flex-col justify-center">
-      <h2 className="text-xl font-semibold text-purple-700 text-center mb-4">
+    <div className="bg-white dark:bg-gray-900 rounded-xl shadow-md p-4 w-full h-full flex flex-col justify-center">
+      <h2 className="text-xl dark:text-white font-semibold text-purple-700 text-center mb-4">
         Carreras recomendadas
       </h2>
       <div className="w-full h-full max-h-[400px] flex items-center justify-center">
