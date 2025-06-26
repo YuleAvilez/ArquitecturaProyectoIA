@@ -17,4 +17,8 @@ export const ControllerDependencies: RoutingControllersOptions = {
   ],
   authorizationChecker: authorizationChecker,
   middlewares: [SessionValidatorMiddleware],
+  cors: {
+    origin: "*",
+    credentials: true
+  }
 };

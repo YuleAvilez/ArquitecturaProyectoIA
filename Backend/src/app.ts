@@ -1,17 +1,17 @@
-import "reflect-metadata";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Express } from "express";
+import "reflect-metadata";
 import { createExpressServer, useContainer } from "routing-controllers";
 import swaggerUi from "swagger-ui-express";
 import Container from "typedi";
 import authenticateDB from "./config/configDb";
 import { ConfigSwagger } from "./config/swagger";
 import { ControllerDependencies } from "./controllers/controllerDependencies";
-import { initializeMappers } from "./services/mapper/mapperInitialize";
 import { registerRepositories } from "./repositories/injectRepository";
 import { registerServices } from "./services/injectServices";
+import { initializeMappers } from "./services/mapper/mapperInitialize";
 
 // configures dotenv to work in your application
 const app: Express = createExpressServer(ControllerDependencies);
