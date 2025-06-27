@@ -59,7 +59,7 @@ export class UserController {
     return await this._changePasswordService.handle(request);
   }
 
-  @Get("/pagiantion")
+  @Get("/pagination")
   async pagiantion(
     @QueryParam("page") page: number = 1,
     @QueryParam("size") size: number = 10
