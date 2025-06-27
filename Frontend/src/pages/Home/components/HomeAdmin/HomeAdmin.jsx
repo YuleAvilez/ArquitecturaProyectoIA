@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Loading } from "../../../../components/Loading";
 import { GetAdminReport } from "../../../../services/api/dashboard/getAdminReport";
 import { LastSurvey } from "./LastSurvey";
@@ -23,6 +24,7 @@ export const HomeAdmin = () => {
 
     fetchAdminReport();
   }, []);
+  
   return (
     <>
       {loading ?

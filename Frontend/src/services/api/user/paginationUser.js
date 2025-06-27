@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
 
-export const GetAdminReport = async (page = 1, size = 10) => {
+export const GetAllUsers = async (page = 1, size = 10) => {
     try {
         const response = await axios.get(`${API_URL}/user/pagination`, {
             params: { page, size }

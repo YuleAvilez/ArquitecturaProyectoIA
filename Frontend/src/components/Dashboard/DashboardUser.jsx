@@ -1,10 +1,11 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
+import { UserMenu } from "./UserMenu";
 
 export const DashboardUser = () => {
   return (
-    <div className="grid grid-rows-[8%_92%] h-screen">
-      <div className="bg-purple-700 flex justify-between items-center p-6">
+    <div className="grid grid-rows-[12%_88%] h-screen">
+      <div className="dark:bg-purple-950 bg-purple-700 flex justify-between items-center p-6">
         <div className="flex items-center gap-4">
           <NavLink
             to="/Dashboard"
@@ -17,7 +18,7 @@ export const DashboardUser = () => {
             Inicio
           </NavLink>
           <NavLink
-            to="/Dashboard/resumenEncuestaUsuario/:userId"
+            to="/Dashboard/resumenEncuestaUsuario"
             end
             className={({ isActive }) =>
               `text-white px-4 py-2 rounded transition-all ${isActive ? "bg-purple-800" : "hover:bg-purple-800"
@@ -30,15 +31,11 @@ export const DashboardUser = () => {
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <img
-            className="bg-white inline-block size-10 rounded-full ring-2 ring-white"
-            src="avatar_user.jpg"
-            alt="avatar"
-          />
+          <UserMenu />
         </div>
       </div>
 
-      <div className="h-full bg-[#e4e7ec] overflow-auto">
+      <div className="bg-[#e4e7ec] dark:bg-gray-800 overflow-y-auto h-full max-h-full modal-scroll">
         <Outlet />
       </div>
     </div>

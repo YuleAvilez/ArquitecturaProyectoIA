@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { toast } from "react-toastify";
 import { GetAllModules } from "../../services/api/modules/getAllModules";
 import { UserMenu } from "../Dashboard/UserMenu";
 import { Loading } from "../Loading";

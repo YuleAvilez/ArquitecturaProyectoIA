@@ -13,7 +13,6 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/SurveyPage" element={<SurveyPage />} />
         <Route
           path="/Dashboard"
           element={
@@ -23,9 +22,10 @@ export default function AppRoutes() {
           }
         >
           <Route index element={<HomePage />} />
+          <Route path="SurveyPage" element={<SurveyPage />} />
           <Route path="gestionUsuarios" element={<UserPage />} />
           <Route path="gestionEncuesta" element={<SurveyModulePage />} />
-          <Route path="resumenEncuestaUsuario/:userId" element={<UserSurveySummary />} />
+          <Route path="resumenEncuestaUsuario" element={<UserSurveySummary />} />
         </Route>
       </Routes>
     </BrowserRouter>
