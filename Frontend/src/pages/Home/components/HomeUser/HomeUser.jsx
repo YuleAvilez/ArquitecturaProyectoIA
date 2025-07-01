@@ -12,27 +12,18 @@ export const HomeUser = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = getUserIdFromToken();
-
-      if (!userId) {
-        toast.error("No se encontró el usuario inicie sesión nuevamente.");
-        setLoading(false);
-        return;
-      }
-
       try {
+        const userId = getUserIdFromToken();
+        if (!userId)
+          throw("No se encontró el usuario inicie sesión nuevamente.");
+        
         const response = await GetUserReport(userId);
         setData(response);
       } catch (error) {
-        if (
-          typeof error?.response?.data?.message === "string" &&
-          error.response.data.message.includes("No existe una encuesta")
-        ) {
-          toast.info("No se encontró una encuesta registrada.");
+        if (error.includes("No existe una encuesta")) {
           navigate("SurveyPage");
         } else {
           toast.error("Ocurrió un error al cargar el resumen.");
-          console.error(error);
         }
       } finally {
         setLoading(false);

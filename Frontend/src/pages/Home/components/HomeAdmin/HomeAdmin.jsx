@@ -16,7 +16,7 @@ export const HomeAdmin = () => {
         setData(response);
       } catch (error) {
         toast.error("Ocurrió un error al cargar el resumen.");
-        console.error(error);
+        console.error(error.response.data.message ?? "Error al cargar el resumen");
       } finally {
         setLoading(false);
       }

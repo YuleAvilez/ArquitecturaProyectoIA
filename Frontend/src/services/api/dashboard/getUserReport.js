@@ -6,6 +6,7 @@ export const GetUserReport = async (userId) => {
         const response = await axios.get(`${API_URL}/userReport/${userId}`);
         return response.data;
     } catch (error) {
-        throw error;
+        console.error("Error in GetUserReport:", error.response.data.message);
+        throw error.response.data.message;
     }
 };

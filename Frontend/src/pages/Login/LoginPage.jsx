@@ -2,11 +2,13 @@ import { useState } from "react";
 import illustration from "../../assets/images/LoginImage4.jpg";
 import LoginForm from "../../components/LoginForm";
 import RegisterForm from "../../components/RegisterForm";
+import { Loading } from "../../components/Loading";
 
 export default function LoginPage() {
   const [showLogin, setShowLogin] = useState(true);
   const [showForm, setShowForm] = useState(true); // para retrasar el cambio de formulario
   const animacion = 'transform transition-all duration-700 ease-in-out '; // para retrasar el cambio de formulario
+  const [loading, setLoading] = useState(false);
 
   const toggleForm = () => {
     setShowLogin((prev) => !prev);
@@ -18,6 +20,8 @@ export default function LoginPage() {
   };
 
   return (
+    <>
+    {loading && <Loading />}
     <div className={`w-screen h-screen grid lg:grid-cols-2 overflow-hidden ${animacion} bg-white`}>
       
       <div
@@ -27,7 +31,7 @@ export default function LoginPage() {
           ${animacion}
           ${showLogin ? "translate-x-0" : "lg:translate-x-full"}`}
       >
-        {showForm ? <LoginForm onSwitch={toggleForm} /> : <RegisterForm onSwitch={toggleForm} />}
+        {showForm ? <LoginForm onSwitch={toggleForm} setLoading={setLoading} /> : <RegisterForm onSwitch={toggleForm} setLoading={setLoading}/>}
       </div>
 
       <div
@@ -39,8 +43,9 @@ export default function LoginPage() {
           src={illustration}
           alt="Illustration"
           className="max-w-full max-h-full object-contain"
-        />
+          />
       </div>
     </div>
+    </>
   );
 }

@@ -1,15 +1,18 @@
-export async function login({ email, password, role }) {
-  try {
-    const res = await fetch('http://localhost:3000/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password, role }),
-    }); 
+import axios from "axios";
+import { API_URL } from "../../../utils/apiConfig";
 
-    if (!res.ok) throw new Error('Credenciales inválidas');
-    const data = await res.json();
-    return { success: true, token: data.token };
+export const Login = async(request) => {
+  try {
+
+    const response = await axios.post(`${API_URL}/login`, request, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+
   } catch (error) {
-    return { success: false, message: error.message };
+    console.error("Error en el servicio de inicio de sesión:", error);
+    throw error.response.data.message;
   }
 }

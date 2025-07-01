@@ -25,7 +25,7 @@ export const DashboardAdmin = () => {
         setData(response);
       } catch (error) {
         toast.error("Ocurrió un error al cargar el resumen.");
-        console.error(error);
+        console.error(error.response.data.message ?? "Error al cargar los modulos");
       } finally {
         setLoading(false);
       }

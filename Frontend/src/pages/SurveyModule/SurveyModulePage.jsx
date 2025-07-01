@@ -15,7 +15,7 @@ export const SurveyModulePage = () => {
         setData(response);
       } catch (error) {
         toast.error("Ocurrió un error al cargar el resumen.");
-        console.error(error);
+        console.error(error.response.data.message);
       } finally {
         setLoading(false);
       }

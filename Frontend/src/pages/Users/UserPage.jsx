@@ -24,7 +24,7 @@ export const UserPage = () => {
       setTotalPages(response.totalPages || 1);
     } catch (error) {
       toast.error("Ocurrió un error al cargar los usuarios.");
-      console.error(error);
+      console.error(error.response.data.message ?? "Error al cargar los usuarios");
     } finally {
       setLoading(false);
     }

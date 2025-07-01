@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Logout } from "../../services/api/user/logoutServices";
+import {isTokenActive, getUserToken, clearUserToken} from "../../utils";
+import { Loading } from "../Loading";
 
 export const UserMenu = () => {
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
     const menuRef = useRef(null);
     const navigate = useNavigate();
 
@@ -25,13 +29,24 @@ export const UserMenu = () => {
             case "password":
                 navigate("/actualizar-password");
                 break;
-            case "logout":
-                navigate("/login");
-                break;
         }
     };
 
+    const LogoutSession = async () => {
+        const sessionIsActive = isTokenActive();
+        if (sessionIsActive) {
+            const token = getUserToken();
+            setLoading(true);
+            const deletedSession = await Logout(token);
+            setLoading(false);
+            clearUserToken();
+            navigate("/");
+        }
+    }
+
     return (
+        <>
+        {loading && <Loading />}
         <div className="relative" ref={menuRef}>
             <img
                 className="inline-block size-12 rounded-full ring-2 ring-white ml-2 cursor-pointer"
@@ -50,17 +65,18 @@ export const UserMenu = () => {
                     <button
                         onClick={() => handleOption("password")}
                         className="block w-full text-left px-6 py-3 text-base dark:text-white text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
-                    >
+                        >
                         Cambiar contraseña
                     </button>
                     <button
-                        onClick={() => handleOption("logout")}
+                        onClick={() => LogoutSession()}
                         className="block w-full text-left px-6 py-3 text-base text-red-600 hover:bg-red-100 rounded-b-xl dark:hover:bg-red-300"
-                    >
+                        >
                         Cerrar sesión
                     </button>
                 </div>
             )}
         </div>
+        </>
     );
 };
