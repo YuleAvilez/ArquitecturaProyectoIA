@@ -1,8 +1,3 @@
-import {
-  ArrowPathIcon,
-  KeyIcon,
-  PencilSquareIcon,
-} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Loading } from "../../components/Loading";
@@ -30,19 +25,6 @@ export const UserPage = () => {
     }
   };
 
-  const handleEdit = (user) => {
-    console.log("Editar usuario", user);
-  };
-
-  const handlePasswordChange = (user) => {
-    console.log("Cambiar contraseña de", user);
-  };
-
-  const handleRoleChange = (user) => {
-    console.log("Cambiar rol de", user);
-  };
-
-
   useEffect(() => {
     fetchAllUsers(page);
   }, [page]);
@@ -57,23 +39,7 @@ export const UserPage = () => {
     {
       header: "Rol",
       render: (user) => (user.roleId === 1 ? "Admin" : "Usuario"),
-    },
-    {
-      header: "Acciones",
-      render: (user) => (
-        <div className="flex justify-center gap-2">
-          <button onClick={() => handleEdit(user)}>
-            <PencilSquareIcon className="h-5 w-5 hover:text-blue-500" />
-          </button>
-          <button onClick={() => handlePasswordChange(user)}>
-            <KeyIcon className="h-5 w-5 hover:text-yellow-500" />
-          </button>
-          <button onClick={() => handleRoleChange(user)}>
-            <ArrowPathIcon className="h-5 w-5 hover:text-purple-500" />
-          </button>
-        </div>
-      ),
-    },
+    }
   ];
 
 

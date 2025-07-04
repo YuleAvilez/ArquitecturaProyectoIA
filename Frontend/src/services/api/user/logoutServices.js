@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
+import { GlobalException } from "./globalException";
 
 export const Logout = async(refreshToken) => {
   try {
@@ -12,6 +13,6 @@ export const Logout = async(refreshToken) => {
     return response.data;
 
   } catch (error) {
-    throw error.response.data.message;
+    GlobalException(error);
   }
 }

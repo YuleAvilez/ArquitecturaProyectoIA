@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
+import { GlobalException } from "./globalException";
 
 export const Login = async(request) => {
   try {
@@ -12,7 +13,6 @@ export const Login = async(request) => {
     return response.data;
 
   } catch (error) {
-    console.error("Error en el servicio de inicio de sesión:", error);
-    throw error.response.data.message;
+    GlobalException(error);
   }
 }

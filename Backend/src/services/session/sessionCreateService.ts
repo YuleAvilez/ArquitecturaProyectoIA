@@ -50,12 +50,12 @@ export class SessionCreateService implements SessionCreateServiceInterface {
         transaction,
       });
 
-      const mappedData = mapper.map(searchUser, User, UserResponseDto);
-
-      if (!mappedData.userId) {
+      if (!searchUser) {
         throw new Error("Este usuario no existe.");
       }
 
+      const mappedData = mapper.map(searchUser, User, UserResponseDto);
+      
       const isPasswordCorrect = await ComparePassword(
         request?.password!,
         searchUser?.password!

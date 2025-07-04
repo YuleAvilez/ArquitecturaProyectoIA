@@ -19,7 +19,7 @@ export const ThemeToggle = () => {
   return (
     <button
       onClick={handleToggle}
-      className="w-10 h-10 dark:bg-gray-400 dark:border-gray-600 dark:text-white flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-500 hover:shadow transition"
+      className="w-10 h-10 cursor-pointer dark:bg-gray-400 dark:border-gray-600 dark:text-white flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-500 hover:shadow transition"
       aria-label="Cambiar tema"
     >
       {theme ? (

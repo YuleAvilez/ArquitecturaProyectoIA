@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
+import { GlobalException } from "./globalException";
 
 export const CreateUser = async (request) => {
   try {
@@ -10,6 +11,6 @@ export const CreateUser = async (request) => {
     });
     return response.data;
   } catch (error) {
-     throw error.response.data.message;
+    GlobalException(error);
   }
 };
