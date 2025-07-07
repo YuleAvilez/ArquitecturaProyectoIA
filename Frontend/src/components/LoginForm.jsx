@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import { Login } from "../services/api/user/loginServices";
 import { setUserToken } from "../utils";  
 export default function LoginForm({ onSwitch, setLoading }) {
@@ -69,7 +70,9 @@ const handleSubmit = async (e) => {
         </div>
 
         <div className="flex justify-between items-center text-sm">
-          <a href="#" className="text-purple-700 hover:underline">¿Olvidaste la contraseña?</a>
+          <Link to="/forgot-password" className="text-purple-700 hover:underline">
+            ¿Olvidaste tu contraseña?
+          </Link>
         </div>
 
         <div>

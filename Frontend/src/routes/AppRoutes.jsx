@@ -19,7 +19,21 @@ export default function AppRoutes() {
           <PublicRoutes>
             <LoginPage />
           </PublicRoutes>
-          } />
+        }/>
+        <Route path="/forgot-password" element={
+          <PublicRoutes>
+            <ForgetPasswordPage />
+          </PublicRoutes>
+        }/>
+        
+        <Route path="/reset-password/:token" element={
+          <PublicRoutes>
+            <ResetPasswordPage />
+          </PublicRoutes>
+        }/>
+
+        {/* Rutas protegidas */}
+
         <Route
           path="/Dashboard"
           element={
@@ -33,8 +47,7 @@ export default function AppRoutes() {
           <Route path="gestionUsuarios" element={<UserPage />} />
           <Route path="gestionEncuesta" element={<SurveyModulePage />} />
           <Route path="resumenEncuestaUsuario" element={<UserSurveySummary />} />
-          <Route path="/forgot-password" element={<ForgetPasswordPage />} />
-          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

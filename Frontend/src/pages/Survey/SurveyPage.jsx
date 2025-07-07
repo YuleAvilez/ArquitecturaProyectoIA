@@ -32,11 +32,6 @@ const SurveyPage = () => {
       setStep(step + 1);
     } else {
       toast.success('¡Encuesta completada!');
-      setStatus('loading');
-      setTimeout(() => {
-        setCareer('Psicología');
-        setStatus('result');
-      }, 3000);
     }
   };
 
