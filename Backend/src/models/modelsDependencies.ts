@@ -1,6 +1,7 @@
 import { CareerDetails } from "./careerDetails/model/careerDetailsModel";
 import { CareerRecommendations } from "./careerRecommendations/model/careerRecommendationsModel";
 import { Modules } from "./modules/model/modulesModel";
+import { QuestionSectionModel } from "./QuestionSection/model/QuestionSectionModel";
 import { Session } from "./session/model/sessionModel";
 import { SurveyQuestions } from "./surveyQuestions/model/surveyQuestionsModel";
 import { User } from "./user/model/userModel";
@@ -17,4 +18,5 @@ export const ModelsDependencies = [
   UserVocationalResponses,
   CareerRecommendations,
   CareerDetails,
+  QuestionSectionModel
 ];

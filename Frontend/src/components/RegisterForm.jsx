@@ -46,7 +46,7 @@ export default function RegisterForm({ onSwitch, setLoading }) {
   return (
     <>
       <h2 className="text-3xl font-extrabold text-purple-800 text-center">Crear Cuenta</h2>
-      <form className="py-1 grid gap-y-6" onSubmit={handleRegister}>
+      <form className="py-1 grid gap-y-5" onSubmit={handleRegister}>
 
         <div className="flex items-center gap-3 mb-4">
           <span className="text-sm text-gray-500 font-medium">

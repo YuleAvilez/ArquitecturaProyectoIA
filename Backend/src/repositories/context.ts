@@ -8,6 +8,7 @@ import { SurveyQuestions } from "../models/surveyQuestions/model/surveyQuestions
 import { User } from "../models/user/model/userModel";
 import { UserVocationalResponses } from "../models/userVocationalResponses/model/userVocationalResponsesModel";
 import { VocationalSurveys } from "../models/vocationalSurveys/model/vocationalSurveysModel";
+import { QuestionSectionModel } from "../models/QuestionSection/model/QuestionSectionModel";
 
 export class Context {
   // Repositorio User
@@ -20,6 +21,7 @@ export class Context {
   public userVocationalResponse: ModelCtor<UserVocationalResponses>;
   public careerRecommendation: ModelCtor<CareerRecommendations>;
   public careerDetail: ModelCtor<CareerDetails>;
+  public questionSection: ModelCtor<QuestionSectionModel>;
 
   constructor() {
     // Obtener los repositorios de la conexión a la base de datos
@@ -33,6 +35,7 @@ export class Context {
     );
     this.careerRecommendation = connection.getRepository(CareerRecommendations);
     this.careerDetail = connection.getRepository(CareerDetails);
+    this.questionSection = connection.getRepository(QuestionSectionModel);
   }
 }
 

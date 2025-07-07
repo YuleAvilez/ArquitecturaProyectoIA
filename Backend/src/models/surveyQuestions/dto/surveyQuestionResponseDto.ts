@@ -11,5 +11,8 @@ export class SurveyQuestionResponseDto {
   public order?: number;
 
   @AutoMap()
+  public questionSectionId?: number;
+
+  @AutoMap()
   public systemDefined?: boolean;
 }

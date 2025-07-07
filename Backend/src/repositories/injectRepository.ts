@@ -16,6 +16,8 @@ import { UserVocationalResponses } from "../models/userVocationalResponses/model
 import { VocationalSurveyRequestDto } from "../models/vocationalSurveys/dto/vocationalSurveyRequestDto";
 import { VocationalSurveys } from "../models/vocationalSurveys/model/vocationalSurveysModel";
 import { GenericRepository } from "../repositories/GenericRepository";
+import { QuestionSectionModel } from "../models/QuestionSection/model/QuestionSectionModel";
+import { QuestionSectionRequestDto } from "../models/QuestionSection/dto/QuestionSectionRequestDto";
 
 export function registerRepositories() {
   Container.set(
@@ -57,5 +59,9 @@ export function registerRepositories() {
   Container.set(
     "CareerDetailRepository",
     new GenericRepository<CareerDetailRequestDto, CareerDetails>("careerDetail")
+  );
+  Container.set(
+    "QuestionSectionRepository",
+    new GenericRepository<QuestionSectionRequestDto, QuestionSectionModel>("questionSection")
   );
 }

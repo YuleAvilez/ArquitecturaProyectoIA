@@ -31,6 +31,8 @@ import { GenerateCareerDetailsService } from "./vocationalSurveys/chapGpt/genera
 import { UserReportDashboardService } from "./vocationalSurveys/dashboard/user/userReportDashboardService";
 import { GetUserVocationalResponseByUserIdService } from "./vocationalSurveys/vocationalSurveyGetByUserIdService";
 import { VocationalSurveyProcessingService } from "./vocationalSurveys/processing/vocationalSurveyProcessingService";
+import { SurveyQuestionListGetAllServiceInterface } from "../interfaces/services/surveyQuestion/surveyQuestionListGetAllServiceInterface";
+import { SurveyQuestionListGetAllService } from "./surveyQuestions/surveyQuestionListGetAllService";
 
 export function registerServices() {
   Container.set<UserCreateServiceInterface>(
@@ -104,5 +106,9 @@ export function registerServices() {
   Container.set<SurveyQuestionGetAllServiceInterface>(
     "SurveyQuestionGetAllServiceInterface",
     Container.get(SurveyQuestionGetAllService)
+  );
+  Container.set<SurveyQuestionListGetAllServiceInterface>(
+    "SurveyQuestionListGetAllServiceInterface",
+    Container.get(SurveyQuestionListGetAllService)
   );
 }
