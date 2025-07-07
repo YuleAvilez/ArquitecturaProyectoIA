@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { DashboardPage } from "../components/Dashboard/DashboardPage";
 import { HomePage } from "../pages/Home/HomePage";
 import LoginPage from "../pages/Login/LoginPage";
+import ForgetPasswordPage from "../pages/ForgotPassword/ForgotPasswordPage";
+import ResetPasswordPage from "../pages/ResetPassword/ResetPasswordPage"; // Importa la página de restablecimiento de contraseña
 import SurveyPage from "../pages/Survey/SurveyPage";
 import { SurveyModulePage } from "../pages/SurveyModule/SurveyModulePage";
 import { UserPage } from "../pages/Users/UserPage";
@@ -31,6 +33,8 @@ export default function AppRoutes() {
           <Route path="gestionUsuarios" element={<UserPage />} />
           <Route path="gestionEncuesta" element={<SurveyModulePage />} />
           <Route path="resumenEncuestaUsuario" element={<UserSurveySummary />} />
+          <Route path="/forgot-password" element={<ForgetPasswordPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

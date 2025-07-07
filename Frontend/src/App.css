@@ -39,4 +39,15 @@
 
 .read-the-docs {
   color: #888;
+
+  /* Scroll invisible */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 }

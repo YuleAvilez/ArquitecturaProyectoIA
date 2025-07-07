@@ -47,6 +47,10 @@ const SurveyPage = () => {
   if (status === 'loading') return <SurveyLoading />;
   if (status === 'result') return <SurveyResult career={career} />;
 
+  const questionStartIndex = surveySections
+    .slice(0, step)
+    .reduce((acc, section) => acc + section.questions.length, 0);
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-purple-300 p-4">
       <ToastContainer />
@@ -59,11 +63,13 @@ const SurveyPage = () => {
         </p>
 
         <SurveyProgress currentStep={step} totalSteps={surveySections.length} />
+
         <SurveyStep
           title={surveySections[step].title}
           questions={surveySections[step].questions}
           answers={answers[step]}
           onAnswerChange={handleChange}
+          questionStartIndex={questionStartIndex}
         />
 
         <div className="flex justify-between mt-8">
