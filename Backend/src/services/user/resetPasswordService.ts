@@ -20,23 +20,25 @@ export class ResetPasswordService implements ResetPasswordServiceInterface {
     if (errors.length > 0) {
       throw new Error("Datos inválidos. Verifica el formulario.");
     }
+    console.log("Request recibido:", request);
 
     const decoded: any = jwt.verify(request.token, process.env.JWT_SECRET!);
-    const userId = decoded.id;
+    console.log("Token decodificado:", decoded);
+    const userIdToken = decoded.id;
 
-    const user = await this._repository.getById(userId);
+    const user = await this._repository.getById(userIdToken);
+    console.log("Usuario encontrado:", user);
     if (!user) {
+      console.error("Usuario no encontrado con ID:", userIdToken);
       throw new Error("Usuario no encontrado.");
     }
 
   const hashedPassword = await EncryptPassword(request.newPassword);
+  console.log("Contraseña hasheada:", hashedPassword);
 
   user.password = hashedPassword;
 
-    await this._repository.update(
-    user,
-    { where: { userId } }
-    );
+    await this._repository.update({password: hashedPassword}, { where: {userId: userIdToken } });
     return true;
   }
 }
