@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
+import { GlobalException } from "../../../utils/globalException";
 
 export const GetAllSurveyQuestionsList = async () => {
     try {

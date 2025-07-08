@@ -28,13 +28,13 @@ const SurveyStep = ({ title, questions, answers, onAnswerChange, questionStartIn
             <span className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-500 text-white font-bold text-sm mt-1">
               {questionStartIndex + i + 1}
             </span>
-            {q}
+            {q.title}
           </label>
           <textarea
             className="w-full min-h-[90px] px-4 py-2 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 text-black focus:ring-purple-400 transition-all"
-            value={answers[i]}
-            onChange={(e) => onAnswerChange(i, e.target.value)}
-            placeholder={getPlaceholder(q)}
+            value={answers[i].answer || ''}
+            onChange={(e) => onAnswerChange(i, e.target.value, q.id)}
+            placeholder={getPlaceholder(q.title)}
           />
         </div>
       ))}

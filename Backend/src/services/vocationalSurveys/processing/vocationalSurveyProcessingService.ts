@@ -37,6 +37,7 @@ export class VocationalSurveyProcessingService
     const transaction = await connection.transaction();
 
     try {
+      console.log(request, "request");
       await this._surveyValidatorService.validateInput(request);
 
       const hasSurvey = await this._repository.getOne({

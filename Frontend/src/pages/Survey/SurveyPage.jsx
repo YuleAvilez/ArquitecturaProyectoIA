@@ -8,10 +8,11 @@ import SurveyLoading from '../../components/Survey/SurveyLoading';
 import SurveyResult from '../../components/Survey/SurveyResult';
 import { Loading } from '../../components/Loading';
 import { GetAllSurveyQuestionsList } from '../../services/api/SurveyQuestion/getAllSurveyQuestionListService';
+import { ProcessingAnswers } from '../../services/api/SurveyQuestion/processingAnswersService';
 
 const SurveyPage = () => {
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState("");
+  const [answers, setAnswers] = useState([0,""]);
   const [status, setStatus] = useState('form');
   const [career, setCareer] = useState('Ingeniería en Sistemas');
   const [surveySections, setSurveySections] = useState([]);
@@ -27,11 +28,11 @@ const SurveyPage = () => {
       if (response && response.length > 0) {
         const sections = response.map((section) => ({
           title: section.title,
-          questions: section.questions.map((question) => question.title),
+          questions: section.questions.map((question) => question),
         }));
         
         setSurveySections(sections);
-        setAnswers(sections.map((s) => s.questions.map(() => '')));
+        setAnswers(sections.map((s) => s.questions.map(() => ({ id: null, answer: '' }))));
         setLoad(false);
       }
       } catch (error) {
@@ -43,16 +44,38 @@ const SurveyPage = () => {
 
   }, [])
   
+  const EnviarEncuesta = async () => {
+    setStatus('loading');
+    try {
+      const Response = await ProcessingAnswers(answers);
+      if (Response) {
+        console.log("Respuesta del servidor:", Response);
+        setStatus('result');
+        setCareer(Response.career);
+      } else {
+        toast.error('Error al procesar las respuestas. Por favor, inténtalo de nuevo más tarde.');
+        setStatus('form');
+      }
+    } catch (error) {
+      toast.error(error);
+      setStatus('form');
+    }
+  };
 
-  const handleChange = (index, value) => {
+  const handleChange = (index, value, id) => {
     const updated = [...answers];
-    updated[step][index] = [step, value];
+    updated[step][index] = {id: id, answer:value};
     setAnswers(updated);
-    console.log('Respuestas actualizadas:', updated);
   };
 
   const handleNext = () => {
-    if (answers[step].some((ans) => ans.trim() === '')) {
+    const currentAnswers = answers[step];    
+    const hasEmptyAnswer = currentAnswers.map(a => a.answer).some((ans) => {
+      if (typeof ans !== 'string') return true;
+      return ans.trim() === '';
+    });
+
+    if (hasEmptyAnswer) {
       toast.error('Por favor, responde todas las preguntas.');
       return;
     }
@@ -60,8 +83,7 @@ const SurveyPage = () => {
     if (step < surveySections.length - 1) {
       setStep(step + 1);
     } else {
-      console.log('Respuestas finales:', answers);
-      toast.success('¡Encuesta completada!');
+      EnviarEncuesta()
     }
   };
 
@@ -69,7 +91,7 @@ const SurveyPage = () => {
     if (step > 0) setStep(step - 1);
   };
 
-  if (status === 'loading') return <SurveyLoading />;
+  if (status.equals === 'loading') return <SurveyLoading />;
   if (status === 'result') return <SurveyResult career={career} />;
 
   const questionStartIndex = surveySections

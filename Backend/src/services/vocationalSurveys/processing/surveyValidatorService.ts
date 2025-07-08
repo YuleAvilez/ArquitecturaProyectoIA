@@ -6,7 +6,8 @@ import { VocationalSurveyProcessingRequestDto } from "../../../models/vocational
 export class SurveyValidatorService {
     async validateInput(request: VocationalSurveyProcessingRequestDto) {
         const errors = await validate(request);
-
+        console.clear()
+        console.log('\nrequest data:', request);
         if (errors?.length > 0) throw new Error("Enviar todos los datos.");
         if (!request.surveyAnswers) throw new Error("No se han enviado respuestas a la encuesta.");
         if (request.surveyAnswers.length < 13)
