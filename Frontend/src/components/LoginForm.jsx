@@ -39,8 +39,8 @@ const handleSubmit = async (e) => {
   return (
     <>
       <div className="mb-8">
-            <h1 className="text-4xl font-extrabold text-purple-800">Proyecto IA</h1>
-            <h2 className="text-4xl font-bold text-gray-900">Hola, bienvenido</h2>
+            <h1 className="text-4xl font-extrabold text-purple-800">Explorando tu futuro</h1>
+            <h2 className="text-3xl font-bold text-gray-900">Hola, bienvenido</h2>
             <p className="text-lg text-gray-600">
               Ingresa aquí
             </p>
