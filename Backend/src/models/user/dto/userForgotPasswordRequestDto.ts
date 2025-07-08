@@ -1,5 +1,4 @@
-import { AutoMap } from "@automapper/classes";
-import { IsNotEmpty, IsEmail, IsString } from "class-validator";
+import { IsEmail, IsNotEmpty } from "class-validator";
 
 export class UserForgotPasswordRequestDto {
   @IsNotEmpty({ message: "El correo es obligatorio." })

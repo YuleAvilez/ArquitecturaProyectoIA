@@ -1,8 +1,6 @@
 // src/services/api/user/forgotPasswordService.js
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
-import { GlobalException } from "./globalException";
-
 export const forgotPassword = async ({ correo }) => {
   try {
     const response = await axios.post(`${API_URL}/user/forgot-password`, { correo }, {

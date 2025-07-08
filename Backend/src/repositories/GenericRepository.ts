@@ -114,7 +114,7 @@ export class GenericRepository<
    * @throws Error si la entidad no se encuentra o hay un error en la actualización.
    */
   async update(
-    request: TRequest,
+    request: Partial<TRequest>,
     options: UpdateOptions<TModel>
   ): Promise<TModel> {
     try {

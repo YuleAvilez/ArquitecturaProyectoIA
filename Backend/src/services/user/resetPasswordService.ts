@@ -6,12 +6,13 @@ import { GenericRepository } from "../../repositories/GenericRepository";
 import { ResetPasswordServiceInterface } from "../../interfaces/services/user/IResetPasswordService";
 import { UserResetPasswordRequestDto } from "../../models/user/dto/userResetPasswordRequestDto";
 import { EncryptPassword } from "../../utils";
+import { UserRequestDto } from "../../models/user/dto/userRequestDto";
 
 @Service() 
 export class ResetPasswordService implements ResetPasswordServiceInterface {
   constructor(
     @Inject("UserRepository")
-    private readonly _repository: GenericRepository<any, User>
+    private readonly _repository: GenericRepository<UserRequestDto, User>
   ) {}
 
   async handle(request: UserResetPasswordRequestDto): Promise<boolean> {
@@ -19,21 +20,25 @@ export class ResetPasswordService implements ResetPasswordServiceInterface {
     if (errors.length > 0) {
       throw new Error("Datos inválidos. Verifica el formulario.");
     }
+    console.log("Request recibido:", request);
 
     const decoded: any = jwt.verify(request.token, process.env.JWT_SECRET!);
-    const userId = decoded.id;
+    console.log("Token decodificado:", decoded);
+    const userIdToken = decoded.id;
 
-    const user = await this._repository.getById(userId);
+    const user = await this._repository.getById(userIdToken);
+    console.log("Usuario encontrado:", user);
     if (!user) {
+      console.error("Usuario no encontrado con ID:", userIdToken);
       throw new Error("Usuario no encontrado.");
     }
 
   const hashedPassword = await EncryptPassword(request.newPassword);
+  console.log("Contraseña hasheada:", hashedPassword);
 
-    await this._repository.update(
-    { password: hashedPassword },
-    { where: { id: userId } }
-    );
+  user.password = hashedPassword;
+
+    await this._repository.update({password: hashedPassword}, { where: {userId: userIdToken } });
     return true;
   }
 }
