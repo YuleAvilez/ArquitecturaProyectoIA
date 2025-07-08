@@ -17,6 +17,10 @@ import { UserRequestDto } from "../models/user/dto/userRequestDto";
 import { UserResponseDto } from "../models/user/dto/userResponseDto";
 import { UserGetAllServiceInterface } from "../interfaces/services/user/userGetAllServiceInterface";
 import { PaginationDto } from "../utils/dto/PaginationDto";
+import { ForgotPasswordServiceInterface } from "../interfaces/services/user/IForgotPasswordService";
+import { UserForgotPasswordRequestDto } from "../models/user/dto/userForgotPasswordRequestDto";
+import { UserResetPasswordRequestDto } from "../models/user/dto/userResetPasswordRequestDto";
+import { ResetPasswordServiceInterface } from "../interfaces/services/user/IResetPasswordService";
 
 @Service()
 @JsonController("/user")
@@ -32,7 +36,13 @@ export class UserController {
     private readonly _changePasswordService: ChangePasswordServiceInterface,
     @Inject("UserGetAllServiceInterface")
     private readonly _userGetAllServiceInterface: UserGetAllServiceInterface,
-  ) { }
+    @Inject("ForgotPasswordServiceInterface")
+    private readonly _forgotPasswordService: ForgotPasswordServiceInterface,
+    @Inject("ResetPasswordServiceInterface")
+    private readonly _resetPasswordService: ResetPasswordServiceInterface
+
+    
+  ) {}
 
   @Post("/create")
   async create(@Body() body: UserRequestDto): Promise<UserResponseDto> {
@@ -65,5 +75,18 @@ export class UserController {
     @QueryParam("size") size: number = 10
   ): Promise<PaginationDto<UserResponseDto>> {
     return await this._userGetAllServiceInterface.handle(page, size);
+  }
+  @Post("/forgot-password")
+  async forgotPassword(
+    @Body() body: UserForgotPasswordRequestDto
+  ): Promise<{ message: string }> {
+    const result = await this._forgotPasswordService.handle(body);
+    if (!result) throw new Error("No se pudo enviar el correo.");
+    return { message: "Correo de recuperación enviado exitosamente" };
+  }
+
+  @Post("/resetPassword")
+  async resetPassword(@Body() request: UserResetPasswordRequestDto): Promise<boolean> {
+    return await this._resetPasswordService.handle(request);
   }
 }

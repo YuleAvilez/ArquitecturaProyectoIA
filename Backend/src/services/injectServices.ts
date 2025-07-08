@@ -33,6 +33,10 @@ import { GetUserVocationalResponseByUserIdService } from "./vocationalSurveys/vo
 import { VocationalSurveyProcessingService } from "./vocationalSurveys/processing/vocationalSurveyProcessingService";
 import { SurveyQuestionListGetAllServiceInterface } from "../interfaces/services/surveyQuestion/surveyQuestionListGetAllServiceInterface";
 import { SurveyQuestionListGetAllService } from "./surveyQuestions/surveyQuestionListGetAllService";
+import { ForgotPasswordServiceInterface } from "../interfaces/services/user/IForgotPasswordService";
+import { ForgotPasswordService } from "./user/forgotPasswordService";
+import { ResetPasswordServiceInterface } from "../interfaces/services/user/IResetPasswordService";
+import { ResetPasswordService } from "./user/resetPasswordService";
 
 export function registerServices() {
   Container.set<UserCreateServiceInterface>(
@@ -111,4 +115,14 @@ export function registerServices() {
     "SurveyQuestionListGetAllServiceInterface",
     Container.get(SurveyQuestionListGetAllService)
   );
+    Container.set<ForgotPasswordServiceInterface>(
+      "ForgotPasswordServiceInterface",
+      Container.get(ForgotPasswordService)
+    );
+
+    Container.set<ResetPasswordServiceInterface>(
+    "ResetPasswordServiceInterface",
+    Container.get(ResetPasswordService)
+  );
+
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { resetPasswordService } from "../../services/api/user/resetPasswordService";
 import { toast } from "react-toastify";
 import illustration from "../../assets/images/LoginImage4.jpg";
 
@@ -10,41 +11,38 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!password || !confirm) {
-      toast.error("Por favor, completa ambos campos.");
-      return;
+  if (!password || !confirm) {
+    toast.error("Por favor, completa ambos campos.");
+    return;
+  }
+
+  if (password !== confirm) {
+    toast.error("Las contraseñas no coinciden.");
+    return;
+  }
+
+  try {
+    setLoading(true);
+
+    const res = await resetPasswordService({ token, newPassword: password.trim() });
+console.log("Token desde URL:", token); // Asegúrate de que NO sea undefined
+
+    if (res.success) {
+      toast.success(res.message);
+      navigate("/");
+    } else {
+      toast.error(res.message);
     }
+  } catch (err) {
+    toast.error("Error del servidor");
+  } finally {
+    setLoading(false);
+  }
+};
 
-    if (password !== confirm) {
-      toast.error("Las contraseñas no coinciden.");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      const res = await fetch(`http://localhost:3001/api/auth/reset-password/${token}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Contraseña: password.trim() }),
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        toast.success(data.message);
-        navigate("/");
-      } else {
-        toast.error(data.message || "Error al restablecer la contraseña");
-      }
-    } catch (err) {
-      toast.error("Error del servidor");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="w-screen h-screen grid lg:grid-cols-2 overflow-hidden bg-white">

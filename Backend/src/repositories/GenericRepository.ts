@@ -26,6 +26,10 @@ export class GenericRepository<
     return this._context;
   }
 
+  async getById(id: number): Promise<TModel | null> {
+  return await this.model.findByPk(id);
+}
+
   public get sequelize() {
     return this._context.sequelize!;
   }
@@ -132,6 +136,7 @@ export class GenericRepository<
       );
     }
   }
+  
 
   /**
    * Eliminar un elemento.

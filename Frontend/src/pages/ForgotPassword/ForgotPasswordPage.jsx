@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import illustration from "../../assets/images/LoginImage4.jpg";
 import { toast } from "react-toastify";
+import { forgotPassword } from "../../services/api/user/forgotPasswordService";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -16,26 +17,16 @@ export default function ForgotPasswordPage() {
     }
 
     try {
-      const res = await fetch("http://localhost:3001/api/auth/forgot-password", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Correo: email }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message);
-
-      toast.success("Revisa tu correo para recuperar tu contraseña.");
-      navigate("/"); // Te devuelve al login
+     const data = await forgotPassword({ correo: email.trim() });
+      toast.success(data.message || "Correo enviado");
+      navigate("/");
     } catch (err) {
-      toast.error(err.message);
+      toast.error("Ocurrió un error al enviar el correo.");
     }
   };
 
   return (
     <div className="w-screen h-screen grid lg:grid-cols-2 overflow-hidden bg-white">
-      {/* Formulario */}
       <div className="left px-8 py-12 flex flex-col justify-center">
         <h1 className="text-4xl font-extrabold text-purple-800 mb-2">Recuperar contraseña</h1>
         <p className="text-lg text-gray-600 mb-8">

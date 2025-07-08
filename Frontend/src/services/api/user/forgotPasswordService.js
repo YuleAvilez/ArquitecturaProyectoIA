@@ -1,22 +1,22 @@
-export const forgotPassword = async ({ Correo }) => {
+// src/services/api/user/forgotPasswordService.js
+import axios from "axios";
+import { API_URL } from "../../../utils/apiConfig";
+import { GlobalException } from "./globalException";
+
+export const forgotPassword = async ({ correo }) => {
   try {
-    const response = await fetch("http://localhost:3001/api/forgot-password", {
-      method: "POST",
+    const response = await axios.post(`${API_URL}/user/forgot-password`, { correo }, {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ Correo }),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      return { success: false, message: data.message || "Error inesperado" };
-    }
-
-    return { success: true, message: data.message, token: data.token };
+    return { success: true, message: response.data.message };
   } catch (error) {
-    console.error("Error en forgotPassword:", error);
-    return { success: false, message: "Error de conexión" };
+    return {
+      success: false,
+      message: error?.response?.data?.message || "Error inesperado",
+    };
   }
 };
+

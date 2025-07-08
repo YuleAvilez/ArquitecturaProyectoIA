@@ -15,7 +15,7 @@ export default function ForgotPasswordForm() {
       return;
     }
 
-    const result = await forgotPassword({ Correo: correo });
+    const result = await forgotPassword({ correo });
 
     if (result.success) {
       toast.success("¡Enlace enviado! Revisa tu correo.");
@@ -24,6 +24,7 @@ export default function ForgotPasswordForm() {
       toast.error(result.message);
     }
   };
+
 
   return (
     <>
