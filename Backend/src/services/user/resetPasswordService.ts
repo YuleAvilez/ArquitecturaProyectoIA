@@ -6,12 +6,13 @@ import { GenericRepository } from "../../repositories/GenericRepository";
 import { ResetPasswordServiceInterface } from "../../interfaces/services/user/IResetPasswordService";
 import { UserResetPasswordRequestDto } from "../../models/user/dto/userResetPasswordRequestDto";
 import { EncryptPassword } from "../../utils";
+import { UserRequestDto } from "../../models/user/dto/userRequestDto";
 
 @Service() 
 export class ResetPasswordService implements ResetPasswordServiceInterface {
   constructor(
     @Inject("UserRepository")
-    private readonly _repository: GenericRepository<any, User>
+    private readonly _repository: GenericRepository<UserRequestDto, User>
   ) {}
 
   async handle(request: UserResetPasswordRequestDto): Promise<boolean> {
@@ -30,9 +31,11 @@ export class ResetPasswordService implements ResetPasswordServiceInterface {
 
   const hashedPassword = await EncryptPassword(request.newPassword);
 
+  user.password = hashedPassword;
+
     await this._repository.update(
-    { password: hashedPassword },
-    { where: { id: userId } }
+    user,
+    { where: { userId } }
     );
     return true;
   }

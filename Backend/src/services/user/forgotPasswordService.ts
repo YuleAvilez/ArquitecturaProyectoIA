@@ -1,18 +1,19 @@
 // src/services/user/ForgotPasswordService.ts
 import { validate } from "class-validator";
+import jwt from "jsonwebtoken";
 import { Inject, Service } from "typedi";
 import { ForgotPasswordServiceInterface } from "../../interfaces/services/user/IForgotPasswordService";
 import { UserForgotPasswordRequestDto } from "../../models/user/dto/userForgotPasswordRequestDto";
+import { UserRequestDto } from "../../models/user/dto/userRequestDto";
 import { User } from "../../models/user/model/userModel";
 import { GenericRepository } from "../../repositories/GenericRepository";
 import { sendResetPasswordEmail } from "../../utils/email/sendResetPassword";
-import jwt from "jsonwebtoken";
 
 @Service() 
 export class ForgotPasswordService implements ForgotPasswordServiceInterface {
   constructor(
     @Inject("UserRepository")
-    private readonly _repository: GenericRepository<any, User>
+    private readonly _repository: GenericRepository<UserRequestDto, User>
   ) {}
 
   async handle(request: UserForgotPasswordRequestDto): Promise<boolean> {
@@ -24,12 +25,14 @@ export class ForgotPasswordService implements ForgotPasswordServiceInterface {
     const user = await this._repository.getOne({
       where: { email: request.correo },
     });
+    
+    const dataPlain= user?.get({ plain: true });
 
-    if (!user) {
+    if (!dataPlain) {
       throw new Error("No se encontró un usuario con ese correo.");
     }
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, {
+    const token = jwt.sign({ id: dataPlain.userId }, process.env.JWT_SECRET!, {
       expiresIn: "15m",
     });
 

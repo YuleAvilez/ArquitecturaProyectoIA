@@ -1,5 +1,4 @@
 import { UserForgotPasswordRequestDto } from "../../../models/user/dto/userForgotPasswordRequestDto";
-import { UserResponseDto } from "../../../models/user/dto/userResponseDto";
 
 export interface ForgotPasswordServiceInterface {
   /**
