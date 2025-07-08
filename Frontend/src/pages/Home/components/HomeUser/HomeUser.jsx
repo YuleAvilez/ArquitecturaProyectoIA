@@ -4,12 +4,14 @@ import { toast } from "react-toastify";
 import { Loading } from "../../../../components/Loading";
 import { GetUserReport } from "../../../../services/api/dashboard/getUserReport";
 import { getUserIdFromToken } from "../../../../utils";
+import { useOutletContext } from "react-router-dom";
 
 export const HomeUser = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
   const navigate = useNavigate();
-
+  const { setHasSurvey } = useOutletContext();
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,8 +21,10 @@ export const HomeUser = () => {
         
         const response = await GetUserReport(userId);
         setData(response);
+        setHasSurvey(true);
       } catch (error) {
         if (error.includes("No existe una encuesta")) {
+          setHasSurvey(false);
           navigate("SurveyPage");
         } else {
           toast.error("Ocurrió un error al cargar el resumen.");

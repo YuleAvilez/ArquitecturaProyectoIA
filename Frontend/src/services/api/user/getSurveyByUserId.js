@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_URL } from "../../../utils/apiConfig";
+import { GlobalException } from "../../../utils/globalException";
 
 export const GetSurveyByUserId = async (userId) => {
     try {
@@ -7,6 +8,6 @@ export const GetSurveyByUserId = async (userId) => {
 
         return response.data;
     } catch (error) {
-        throw error;
+        GlobalException(error);
     }
 };

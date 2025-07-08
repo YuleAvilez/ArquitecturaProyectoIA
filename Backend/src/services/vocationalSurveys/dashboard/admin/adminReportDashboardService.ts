@@ -37,7 +37,7 @@ export class AdminReportDashboardService
 
       const userByGender = {
         masculino: users.filter((x) => x.genderId === 1).length,
-        femenino: users.filter((x) => x.genderId === 2).length,
+        femenino: users.filter((x) => x.genderId === 0).length,
       };
 
       const response: AdminReportDashboardResponseDto = {

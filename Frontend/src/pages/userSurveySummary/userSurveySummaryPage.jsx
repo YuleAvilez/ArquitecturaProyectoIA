@@ -4,11 +4,13 @@ import { toast } from "react-toastify";
 import { Loading } from "../../components/Loading";
 import { GetSurveyByUserId } from "../../services/api/user/getSurveyByUserId";
 import { getUserIdFromToken } from "../../utils";
+import { useOutletContext } from "react-router-dom";
 
 export const UserSurveySummary = () => {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState();
     const navigate = useNavigate();
+    const { setHasSurvey } = useOutletContext();
 
     useEffect(() => {
         const fetchModules = async () => {
@@ -21,18 +23,21 @@ export const UserSurveySummary = () => {
             }
 
             try {
-                const response = await GetSurveyByUserId();
+                const response = await GetSurveyByUserId(userId);
                 setData(response);
+                setHasSurvey(true);
+                setLoading(false);
             } catch (error) {
                 if (
                     typeof error?.response?.data?.message === "string" &&
                     error.response.data.message.includes("No existe una encuesta")
                 ) {
+                    setHasSurvey(false);
                     toast.info("No se encontró una encuesta registrada.");
-                    navigate("SurveyPage");
+                    navigate("/Dashboard/SurveyPage", { replace: true });
                 } else {
                     toast.error("Ocurrió un error al cargar el resumen.");
-                    console.error(error);
+                    navigate("../");
                 }
             } finally {
                 setLoading(false);
@@ -54,7 +59,7 @@ export const UserSurveySummary = () => {
                         No se encontró información de la encuesta.
                     </p>
                     <p className="text-md text-purple-700 dark:text-purple-400 font-semibold">
-                        Inicia sesión nuevamente.
+                        Intenta nuevamente más tarde o contacta al administrador.
                     </p>
                 </div>
             ) : (

@@ -9,7 +9,7 @@ export const MainOverview = ({ data }) => {
         {/* Total Usuarios */}
         <div className="rounded-lg bg-violet-200 dark:bg-purple-900 dark:text-white text-black flex items-center p-4 w-full h-full min-h-[120px]">
           <img
-            src="survey.png"
+            src="/survey.png"
             alt="icono_encuesta"
             className="w-20 h-20 object-contain"
           />
@@ -24,7 +24,7 @@ export const MainOverview = ({ data }) => {
         {/* Total Encuestas */}
         <div className="rounded-lg bg-violet-200 dark:bg-purple-900 dark:text-white text-black flex items-center p-4 w-full h-full min-h-[120px]">
           <img
-            src="group.png"
+            src="/group.png"
             alt="icono_grupo"
             className="w-20 h-20 object-contain"
           />
@@ -49,7 +49,7 @@ export const MainOverview = ({ data }) => {
           {/* Frase motivacional */}
           <div className="bg-purple-800 dark:bg-purple-950 text-white rounded-xl shadow-lg p-6 flex items-start gap-4">
             <img
-              src="start.png"
+              src="/start.png"
               alt="icono motivacional"
               className="w-16 h-16 object-contain"
             />

@@ -50,7 +50,7 @@ export const UserMenu = () => {
         <div className="relative" ref={menuRef}>
             <img
                 className="inline-block size-12 rounded-full ring-2 ring-white ml-2 cursor-pointer"
-                src="avatar_user.jpg"
+                src="/avatar_user.jpg"
                 alt="avatar"
                 onClick={() => setOpen(!open)}
             />

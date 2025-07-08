@@ -10,6 +10,7 @@ import { UserPage } from "../pages/Users/UserPage";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 import { PublicRoutes } from "./PublicRoutes";
 import { UserSurveySummary } from "../pages/userSurveySummary/userSurveySummaryPage";
+import { RoleBasedRoute } from "./ProtectedRoutesRoleBased";
 
 export default function AppRoutes() {
   return (
@@ -43,10 +44,34 @@ export default function AppRoutes() {
           }
         >
           <Route index element={<HomePage />} />
-          <Route path="SurveyPage" element={<SurveyPage />} />
-          <Route path="gestionUsuarios" element={<UserPage />} />
-          <Route path="gestionEncuesta" element={<SurveyModulePage />} />
-          <Route path="resumenEncuestaUsuario" element={<UserSurveySummary />} />
+
+          <Route path="SurveyPage" 
+            element={
+                      <RoleBasedRoute allowedRoles={[2]}>
+                        <SurveyPage />
+                        </RoleBasedRoute>
+                    } />
+
+          <Route path="gestionUsuarios" 
+            element={
+                      <RoleBasedRoute allowedRoles={[1]}>
+                        <UserPage />
+                      </RoleBasedRoute>
+                    } />
+
+          <Route path="gestionEncuesta" 
+            element={
+                      <RoleBasedRoute allowedRoles={[1]}>
+                        <SurveyModulePage />
+                      </RoleBasedRoute>
+                    } />
+
+          <Route path="resumenEncuestaUsuario" 
+            element={
+                      <RoleBasedRoute allowedRoles={[2]}>
+                        <UserSurveySummary />
+                      </RoleBasedRoute>
+                    } />
 
         </Route>
       </Routes>

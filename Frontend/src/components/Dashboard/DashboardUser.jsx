@@ -1,12 +1,15 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 import { UserMenu } from "./UserMenu";
+import { useState } from "react";
 
 export const DashboardUser = () => {
+  const [hasSurvey, setHasSurvey] = useState(false);
+  
   return (
     <div className="grid grid-rows-[12%_88%] h-screen">
-      <div className="dark:bg-purple-950 bg-purple-700 flex justify-between items-center p-6">
-        <div className="flex items-center gap-4">
+      <div className={`dark:bg-purple-950 bg-purple-700 flex ${hasSurvey ? 'justify-between' : 'justify-end'} items-center p-6`}>
+        <div className={`${hasSurvey ? 'flex' : 'hidden'} items-center gap-4`}>
           <NavLink
             to="/Dashboard"
             end
@@ -17,6 +20,7 @@ export const DashboardUser = () => {
           >
             Inicio
           </NavLink>
+
           <NavLink
             to="/Dashboard/resumenEncuestaUsuario"
             end
@@ -25,7 +29,7 @@ export const DashboardUser = () => {
               }`
             }
           >
-            Encuesta
+            Resumen encuesta
           </NavLink>
         </div>
 
@@ -36,7 +40,7 @@ export const DashboardUser = () => {
       </div>
 
       <div className="bg-[#e4e7ec] dark:bg-gray-800 overflow-y-auto h-full max-h-full modal-scroll">
-        <Outlet />
+        <Outlet context={{setHasSurvey}}/>
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ export const DashboardAdmin = () => {
         <div className="min-h-screen flex flex-col md:flex-row">
           {/* Botón hamburguesa visible solo en pantallas pequeñas */}
           <div className="md:hidden p-2 flex justify-between items-center bg-purple-700 dark:bg-purple-950 text-white">
-            <img src="logo.png" alt="logo" className="w-24" />
+            <img src="/logo.png" alt="logo" className="w-24" />
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="focus:outline-none"
@@ -68,7 +68,7 @@ export const DashboardAdmin = () => {
             md:block md:w-1/5 transition-all duration-300`}
           >
             <div className="hidden md:flex items-end mb-4">
-              <img src="logo.png" alt="logo" className="w-24 mx-auto" />
+              <img src="/logo.png" alt="logo" className="w-24 mx-auto" />
             </div>
 
             <nav className="space-y-2">
