@@ -135,14 +135,14 @@ const SurveyPage = () => {
       :
       <div className="min-h-screen w-full flex flex-col items-center justify-center p-4
   bg-gradient-to-br from-purple-100 to-purple-300 
-  dark:from-gray-800 dark:to-gray-900">
+  dark:from-gray-950 dark:to-black">
 
       <ToastContainer />
-      <div className=" bg-white w-full max-w-3xl rounded-2xl shadow-xl p-6 sm:p-10">
+      <div className=" bg-white dark:bg-gray-900 w-full max-w-3xl rounded-2xl shadow-xl p-6 sm:p-10">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-purple-400 text-center mb-2">
           Explorando tu futuro
         </h1>
-        <p className="text-sm text-gray-500 text-center mb-6">
+        <p className="text-sm text-gray-500 dark:text-gray-200 text-center mb-6">
           Tus respuestas nos ayudarán a conocerte mejor
         </p>
 
@@ -160,13 +160,13 @@ const SurveyPage = () => {
           <button
             onClick={handlePrevious}
             disabled={step === 0}
-            className="bg-black text-white font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 disabled:opacity-40 transition"
+            className="bg-black cursor-pointer dark:bg-purple-700 text-white font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 disabled:opacity-40 transition"
           >
             Anterior
           </button>
           <button
             onClick={handleNext}
-            className="bg-black text-white font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 transition"
+            className="bg-black cursor-pointer dark:bg-purple-700 text-white font-semibold py-2 px-5 rounded-lg hover:bg-gray-800 dark:hover:bg-purple-900 transition"
           >
             {step === surveySections.length - 1 ? 'Finalizar' : 'Siguiente'}
           </button>

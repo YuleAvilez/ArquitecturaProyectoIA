@@ -6,7 +6,7 @@ const SurveyProgress = ({ currentStep, totalSteps }) => (
         style={{ width: `${((currentStep + 1) / totalSteps) * 100}%` }}
       />
     </div>
-    <p className="mt-1 text-sm text-gray-600 text-center">
+    <p className="mt-1 text-sm text-gray-600 dark:text-gray-200 text-center">
       Sección {currentStep + 1} de {totalSteps}
     </p>
   </div>

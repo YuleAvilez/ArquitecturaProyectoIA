@@ -24,14 +24,14 @@ const SurveyStep = ({ title, questions, answers, onAnswerChange, questionStartIn
     <div className="space-y-6">
       {questions.map((q, i) => (
         <div key={i} className="space-y-2">
-          <label className="flex items-start gap-3 text-base sm:text-lg font-medium text-gray-800">
-            <span className="flex items-center justify-center w-7 h-7 rounded-full bg-purple-500 text-white font-bold text-sm mt-1">
+          <label className="flex items-start gap-3 text-base sm:text-lg font-medium text-gray-800 dark:text-gray-200">
+            <span className="flex items-center justify-center w-7 h-7 px-2 rounded-full bg-purple-500 text-white font-bold text-sm mt-1">
               {questionStartIndex + i + 1}
             </span>
             {q.title}
           </label>
           <textarea
-            className="w-full min-h-[90px] px-4 py-2 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 text-black focus:ring-purple-400 transition-all"
+            className="w-full min-h-[90px] px-4 py-2 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 text-black dark:text-gray-200 focus:ring-purple-400 transition-all"
             value={answers[i].answer || ''}
             onChange={(e) => onAnswerChange(i, e.target.value, q.id)}
             placeholder={getPlaceholder(q.title)}
