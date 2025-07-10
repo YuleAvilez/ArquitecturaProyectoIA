@@ -62,9 +62,9 @@ export class UserController {
     return await this._userUpdateService.handle(id, body);
   }
 
-  @Post("/changePassword")
+   @Post("/changePassword")
   async changePassword(
-    request: UserChangePasswordRequestDto
+    @Body() request: UserChangePasswordRequestDto
   ): Promise<boolean> {
     return await this._changePasswordService.handle(request);
   }

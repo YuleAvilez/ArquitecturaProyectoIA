@@ -8,9 +8,11 @@ import SurveyPage from "../pages/Survey/SurveyPage";
 import { SurveyModulePage } from "../pages/SurveyModule/SurveyModulePage";
 import { UserPage } from "../pages/Users/UserPage";
 import { ProtectedRoutes } from "./ProtectedRoutes";
+import ChangePasswordPage from "../pages/ChangePassword/ChangePasswordPage";
 import { PublicRoutes } from "./PublicRoutes";
 import { UserSurveySummary } from "../pages/userSurveySummary/userSurveySummaryPage";
 import { RoleBasedRoute } from "./ProtectedRoutesRoleBased";
+
 
 export default function AppRoutes() {
   return (
@@ -71,6 +73,11 @@ export default function AppRoutes() {
                       <RoleBasedRoute allowedRoles={[2]}>
                         <UserSurveySummary />
                       </RoleBasedRoute>
+                    } />
+
+           <Route path="actualizar-password"
+            element={
+                     <ChangePasswordPage />
                     } />
 
         </Route>

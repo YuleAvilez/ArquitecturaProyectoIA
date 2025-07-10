@@ -47,18 +47,16 @@ export class ChangePasswordService implements ChangePasswordServiceInterface {
         throw new Error("Esta usuario no existe");
       }
 
-      const isCurrentPasswordValid = await ComparePassword(
-        searchUser?.password!,
-        request?.currentPassword!
-      );
+        const isCurrentPasswordValid = await ComparePassword(
+          request?.currentPassword!,
+          searchUser?.password!,
+        );
+        
+        if (!isCurrentPasswordValid) {
+          throw new Error("La contraseña actual es incorrecta.");
+        }
 
-      if (!isCurrentPasswordValid) {
-        throw new Error("La contraseña actual es incorrecta.");
-      }
-
-      const encryptPassword = await EncryptPassword(
-        request?.currentPassword ?? ""
-      );
+        const encryptPassword = await EncryptPassword(request.newPassword!);
 
       const updatePassword = await this._repository.update(
         { ...searchUser, password: encryptPassword },

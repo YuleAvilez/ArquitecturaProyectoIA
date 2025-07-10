@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logout } from "../../services/api/user/logoutServices";
-import {isTokenActive, getUserToken, clearUserToken} from "../../utils";
+import {isTokenActive, getUserToken, clearUserToken, getUserIdFromToken} from "../../utils";
 import { Loading } from "../Loading";
 
 export const UserMenu = () => {
@@ -22,10 +22,15 @@ export const UserMenu = () => {
 
     const handleOption = (option) => {
         setOpen(false);
+        const userId = getUserIdFromToken();
         switch (option) {
             case "password":
-                navigate("/actualizar-password");
-                break;
+                if (userId) {
+                    navigate("/Dashboard/actualizar-password", { state: { userId } });
+                } else {
+                    console.error("No se pudo obtener el userId desde el token");
+                }
+             break; 
         }
     };
 

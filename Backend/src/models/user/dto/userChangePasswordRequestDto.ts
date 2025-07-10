@@ -1,11 +1,11 @@
 import { AutoMap } from "@automapper/classes";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsString, IsNumber } from "class-validator";
 
 export class UserChangePasswordRequestDto {
   @AutoMap()
   @IsNumber()
   @IsNotEmpty()
-  public userId?: string;
+  public userId?: number;
 
   @AutoMap()
   @IsString()

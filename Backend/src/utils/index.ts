@@ -16,15 +16,14 @@ export const EncryptPassword = async (contraseña: string): Promise<string> => {
 
 /**
  * Compara dos contraseñas.
- * @param contraseña
- * @param contraseñaRecibida
- * @returns
+ * @param passwordRecibida Contraseña que el usuario escribió
+ * @param passwordHasheada Contraseña guardada en BD (hash)
  */
 export const ComparePassword = async (
-  contraseña: string,
-  contraseñaRecibida: string
+  plainTextPassword: string,
+  hashedPassword: string
 ): Promise<boolean> => {
-  return await bcrypt.compare(contraseña, contraseñaRecibida);
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
 };
 
 /**
